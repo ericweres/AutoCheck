@@ -1,4 +1,4 @@
-//package com.autocheck.ui.auth
+package com.autocheck.ui.auth//package com.autocheck.ui.auth
 //
 //import androidx.compose.foundation.layout.*
 //import androidx.compose.foundation.text.KeyboardActions
