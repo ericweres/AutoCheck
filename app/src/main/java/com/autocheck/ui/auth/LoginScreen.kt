@@ -1,9 +1,9 @@
 package com.autocheck.ui.auth
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -28,9 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.autocheck.R
+import com.autocheck.ui.theme.AutoCheckTheme
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(modifier: Modifier = Modifier) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -104,11 +105,19 @@ fun LoginScreen() {
                 )
             )
         }
+        TextButton(onClick = { /* TODO: Handle forgot password */ }) {
+            Text(
+                text = "Don't have an account? Sign Up",
+                color = Color.Blue
+            )
+        }
     }
 }
 
-@Preview(showBackground = true)
+@Preview( showBackground = true, showSystemUi = true,)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    AutoCheckTheme{
+        LoginScreen()
+    }
 }
