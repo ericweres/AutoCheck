@@ -1,4 +1,4 @@
-package com.autocheck
+package com.autocheck.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
