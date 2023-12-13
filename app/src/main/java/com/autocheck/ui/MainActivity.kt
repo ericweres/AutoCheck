@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.autocheck.ui.auth.GetStarted
 import com.autocheck.ui.auth.LoginScreen
 import com.autocheck.ui.theme.AutoCheckTheme
 
