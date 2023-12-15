@@ -1,11 +1,8 @@
 package com.autocheck.nav
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.DirectionsCar
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.PhotoCamera
-import androidx.compose.material.icons.filled.Spa
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -13,22 +10,43 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.autocheck.R
 import com.autocheck.ui.theme.AutoCheckTheme
 
+@Preview
+@Composable
+fun BottomNavigationBarPreview() {
+    AutoCheckTheme {
+        BottomNavigationBar()
+    }
+}
+
 @Composable
 fun BottomNavigationBar(modifier: Modifier = Modifier) {
+    // Get screen height
+    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+    // Calculate 10% of screen height
+    val navBarHeight = screenHeight * 0.1f
+
+    // Apply height and fillMaxWidth to the modifier
+    val updatedModifier = modifier
+        .height(navBarHeight)
+        .fillMaxWidth()
+
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-        modifier = modifier
-    ) {
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
+        modifier = updatedModifier
+    )
+    {
         NavigationBarItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Home,
-                    contentDescription = null
+                    painter = painterResource(id = R.drawable.ic_werkstatt),
+                    contentDescription = null,
                 )
             },
             label = {
@@ -40,7 +58,7 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
         NavigationBarItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Default.PhotoCamera,
+                    painter = painterResource(id = R.drawable.ic_camera),
                     contentDescription = null
                 )
             },
@@ -50,10 +68,11 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
             selected = false,
             onClick = {}
         )
+
         NavigationBarItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Default.DirectionsCar,
+                    painter = painterResource(id = R.drawable.ic_garage),
                     contentDescription = null
                 )
             },
@@ -63,13 +82,5 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
             selected = false,
             onClick = {}
         )
-    }
-}
-
-@Preview
-@Composable
-fun BottomNavigationBarPreview() {
-    AutoCheckTheme {
-        BottomNavigationBar()
     }
 }
