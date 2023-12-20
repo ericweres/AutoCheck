@@ -13,6 +13,8 @@ import com.autocheck.nav.TopNavigationBar
 import com.autocheck.ui.auth.GetStarted
 import com.autocheck.ui.auth.LoginScreen
 import com.autocheck.ui.auth.RegisterScreen
+import com.autocheck.ui.illustrations.IllustKombi
+
 @Composable
 fun AutoCheckNavHost(
     navController: NavHostController,
@@ -42,5 +44,16 @@ fun AutoCheckNavHost(
                )
            }
        }
+        composable( route = "kombi") {
+            Scaffold(
+                bottomBar = { BottomNavigationBar() },
+                topBar = { TopNavigationBar() },
+            ) { innerPadding ->
+                IllustKombi(
+                    modifier = Modifier.padding(innerPadding),
+                    navController
+                )
+            }
+        }
     }
 }
