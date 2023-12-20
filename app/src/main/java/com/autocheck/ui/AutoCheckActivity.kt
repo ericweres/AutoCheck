@@ -46,7 +46,7 @@ fun AutoCheckApp() {
 
 
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun AppPreview() {
     AutoCheckTheme {
