@@ -19,13 +19,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHost
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import com.autocheck.data.AppDatabase
 import com.autocheck.nav.BottomNavigationBar
 import com.autocheck.nav.TopNavigationBar
 import com.autocheck.ui.auth.GetStarted
 import com.autocheck.ui.auth.LoginScreen
 import com.autocheck.ui.theme.AutoCheckTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val db by lazy { Room.databaseBuilder(
+        applicationContext,
+        AppDatabase::class.java, "autocheck.db"
+    ).build(
+    ) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

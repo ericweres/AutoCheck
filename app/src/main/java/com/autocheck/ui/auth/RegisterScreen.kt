@@ -27,19 +27,24 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.autocheck.R
 import com.autocheck.ui.theme.AutoCheckTheme
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.autocheck.data.UserDao
+import com.autocheck.data.UserRepository
+import com.autocheck.viewmodel.UserViewModel
 
 @Composable
 fun RegisterScreen(navController: NavHostController) {
-    var name by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
 
+    val viewModel: UserViewModel = hiltViewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,8 +67,8 @@ fun RegisterScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(50.dp))
         OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
+            value = username,
+            onValueChange = { username = it },
             label = { Text("name") },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
@@ -119,13 +124,16 @@ fun RegisterScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(100.dp))
         Button(
-            onClick = { /* TODO: Handle login logic */ },
+            onClick = {
+                        viewModel.addUser(username, email, password)
+                        navController.navigate("home")
+                      },
             modifier = Modifier
                 .width(302.dp)
                 .height(62.dp)
         ) {
             Text(
-                text = "Login",
+                text = "Registrieren",
                 style = TextStyle(
                     fontSize = 24.sp,
                     fontWeight = FontWeight(700),
