@@ -12,7 +12,7 @@ import com.autocheck.nav.BottomNavigationBar
 import com.autocheck.nav.TopNavigationBar
 import com.autocheck.ui.auth.GetStarted
 import com.autocheck.ui.auth.LoginScreen
-
+import com.autocheck.ui.auth.RegisterScreen
 @Composable
 fun AutoCheckNavHost(
     navController: NavHostController,
@@ -24,10 +24,13 @@ fun AutoCheckNavHost(
         modifier = modifier,
     ) {
         composable( route = "login") {
-            LoginScreen()
+            LoginScreen(navController)
         }
         composable( route = "getStarted") {
             GetStarted(navController)
+        }
+        composable( route = "register") {
+            RegisterScreen(navController)
         }
        composable( route = "home") {
            Scaffold(
