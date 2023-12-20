@@ -39,7 +39,7 @@ fun GetStarted(navController: NavHostController) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(120.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Image(
             painter = painterResource(id = R.drawable.auto_repair),
             contentDescription = "Repair Image",

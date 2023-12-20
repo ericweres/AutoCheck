@@ -29,24 +29,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AutoCheckApp()
+            AutoCheckTheme {
+                AutoCheckApp()
+            }
         }
     }
 }
 
-
 @Composable
 fun AutoCheckApp() {
     val navController = rememberNavController()
-    Scaffold(
-        bottomBar = { BottomNavigationBar() },
-        topBar = { TopNavigationBar() },
-        ) { innerPadding ->
-        AutoCheckNavHost(
-            navController = navController,
-            modifier = Modifier.padding(innerPadding)
-        )
-    }
+    AutoCheckNavHost(
+        navController = navController,
+    )
 }
 
 
