@@ -94,7 +94,7 @@ fun LoginScreen(navController: NavHostController) {
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { /* TODO: Handle login logic */ },
+            onClick = { navController.navigate("home") },
             modifier = Modifier
                 .width(302.dp)
                 .height(62.dp)
