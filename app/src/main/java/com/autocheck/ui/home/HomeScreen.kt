@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.autocheck.R
 
 @Composable
-fun HomeScreen (){
+fun HomeScreen (modifier: Modifier){
 
 
 }
