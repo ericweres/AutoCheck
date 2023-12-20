@@ -27,11 +27,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.autocheck.R
 import com.autocheck.ui.theme.AutoCheckTheme
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -105,7 +107,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 )
             )
         }
-        TextButton(onClick = { /* TODO: Handle forgot password */ }) {
+        TextButton(onClick = { navController.navigate("register") }) {
             Text(
                 text = "Don't have an account? Sign Up",
                 color = Color.Blue
@@ -118,6 +120,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 @Composable
 fun LoginScreenPreview() {
     AutoCheckTheme{
-        LoginScreen()
+        LoginScreen(navController = rememberNavController())
     }
 }

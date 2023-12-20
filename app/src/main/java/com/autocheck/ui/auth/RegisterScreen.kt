@@ -1,81 +1,150 @@
-package com.autocheck.ui.auth//package com.autocheck.ui.auth
-//
-//import androidx.compose.foundation.layout.*
-//import androidx.compose.foundation.text.KeyboardActions
-//import androidx.compose.foundation.text.KeyboardOptions
-//import androidx.compose.material.*
-//import androidx.compose.runtime.*
-//import androidx.compose.ui.Alignment
-//import androidx.compose.ui.Modifier
-//import androidx.compose.ui.text.input.ImeAction
-//import androidx.compose.ui.unit.dp
-//import androidx.lifecycle.viewmodel.compose.viewModel
-//import com.autocheck.ui.theme.AutoCheckTheme
-//
-//@Composable
-//fun RegisterScreen(authViewModel: AuthViewModel = viewModel()) {
-//    AutoCheckTheme {
-//        // A surface container using the 'background' color from the theme
-//        Surface(color = MaterialTheme.colors.background) {
-//            Column(
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .padding(16.dp),
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-//                var username by remember { mutableStateOf("") }
-//                var email by remember { mutableStateOf("") }
-//                var password by remember { mutableStateOf("") }
-//
-//                Text(text = "Register", style = MaterialTheme.typography.h4)
-//                Spacer(modifier = Modifier.height(16.dp))
-//
-//                // Username input
-//                OutlinedTextField(
-//                    value = username,
-//                    onValueChange = { username = it },
-//                    label = { Text("Username") },
-//                    singleLine = true,
-//                    modifier = Modifier.fillMaxWidth()
-//                )
-//                Spacer(modifier = Modifier.height(8.dp))
-//
-//                // Email input
-//                OutlinedTextField(
-//                    value = email,
-//                    onValueChange = { email = it },
-//                    label = { Text("Email") },
-//                    singleLine = true,
-//                    modifier = Modifier.fillMaxWidth(),
-//                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-//                    keyboardActions = KeyboardActions(onNext = { /* Handle next action */ })
-//                )
-//                Spacer(modifier = Modifier.height(8.dp))
-//
-//                // Password input
-//                OutlinedTextField(
-//                    value = password,
-//                    onValueChange = { password = it },
-//                    label = { Text("Password") },
-//                    singleLine = true,
-//                    modifier = Modifier.fillMaxWidth(),
-//                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-//                    keyboardActions = KeyboardActions(onDone = { /* Handle done action */ })
-//                )
-//                Spacer(modifier = Modifier.height(16.dp))
-//
-//                Button(
-//                    onClick = {
-//                        authViewModel.register(username, email, password)
-//                    },
-//                    modifier = Modifier.align(Alignment.End)
-//                ) {
-//                    Text("Register")
-//                }
-//
-//                // Handle UI state changes like showing a progress indicator or error messages
-//                // based on the state in the ViewModel.
-//            }
-//        }
-//    }
-//}
+package com.autocheck.ui.auth
+
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.autocheck.R
+import com.autocheck.ui.theme.AutoCheckTheme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+
+@Composable
+fun RegisterScreen(navController: NavHostController) {
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.height(50.dp))
+        Text(
+            text = "Neues Konto erstellen",
+            fontSize = 30.sp
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Wir helfen Ihnen, sich beim Kauf eines neuen Fahrzeugs sicher zu fühlen",
+            fontSize = 16.sp,
+            color = Color.Gray,
+
+        )
+
+        Spacer(modifier = Modifier.height(50.dp))
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("name") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("email") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("password") },
+            singleLine = true,
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            trailingIcon = {
+                val image = if (passwordVisibility)
+                    Icons.Filled.Visibility
+                else
+                    Icons.Filled.VisibilityOff
+
+                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                    Icon(image, "Toggle password visibility")
+                }
+            }
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = confirmPassword,
+            onValueChange = { confirmPassword = it },
+            label = { Text("confirm password") },
+            singleLine = true,
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            trailingIcon = {
+                val image = if (passwordVisibility)
+                    Icons.Filled.Visibility
+                else
+                    Icons.Filled.VisibilityOff
+
+                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                    Icon(image, "Toggle password visibility")
+                }
+            }
+        )
+
+        Spacer(modifier = Modifier.height(100.dp))
+        Button(
+            onClick = { /* TODO: Handle login logic */ },
+            modifier = Modifier
+                .width(302.dp)
+                .height(62.dp)
+        ) {
+            Text(
+                text = "Login",
+                style = TextStyle(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight(700),
+                )
+            )
+        }
+        TextButton(onClick = { navController.navigate("login") }) {
+            Text(
+                text = "Bereits ein Konto? Zur Anmeldung",
+                color = Color.Blue
+            )
+        }
+    }
+}
+
+@Preview( showBackground = true, showSystemUi = true,)
+@Composable
+fun RegisterScreenPreview() {
+    AutoCheckTheme{
+        RegisterScreen(navController = rememberNavController())
+    }
+}
