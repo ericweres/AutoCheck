@@ -53,7 +53,7 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
             label = {
                 Text("Werkstätte")
             },
-            selected = true,
+            selected = false,
             onClick = {}
         )
         NavigationBarItem(
