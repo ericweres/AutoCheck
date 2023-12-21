@@ -2,15 +2,19 @@ package com.autocheck.ui.illustrations
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +34,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.size
 
 @Composable
 fun IllustKombi(modifier: Modifier, navController: NavHostController) {
@@ -64,13 +69,13 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
 
                     Icon(
                         painter = painterResource(id = R.drawable.ic_arrow),
-                        contentDescription = null ,
+                        contentDescription = null,
                         modifier = Modifier
                             .height(100.dp)
                             .graphicsLayer {
-                            scaleX = -1f // Horizontal spiegeln
-                            // scaleY = -1f // Vertikal spiegeln
-                        }
+                                scaleX = -1f // Horizontal spiegeln
+                                // scaleY = -1f // Vertikal spiegeln
+                            }
                     )
                 },
 
@@ -89,17 +94,98 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
 
             when (wechsler) {
                 1 -> {
-                    Image(
-                        painter = painterResource(id = R.drawable.kombi_front),
-                        contentDescription = "Login Image",
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .width(300.dp)
-                            .height(700.dp)
-                    )
+                    Box() {
+                        Image(
+                            painter = painterResource(id = R.drawable.kombi_front),
+                            contentDescription = "Login Image",
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .width(300.dp)
+                                .height(700.dp)
+                        )
+                        Column {
+                            Spacer(modifier = Modifier.height(230.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(125.dp))
+                                //Innenraum Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Innenraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(85.dp))
+                                //Außenspiegel Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Außenspiegel",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                            Row {
+                                Spacer(modifier = Modifier.width(120.dp))
+                                //Motorraum Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Motorraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                            Row {
+                                Spacer(modifier = Modifier.width(230.dp))
+                                //Scheinwerfer vorne Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Scheinwerfer vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                            Row {
+                                Spacer(modifier = Modifier.width(30.dp))
+                                //Stoßstange vorne Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Stoßstange vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                        }
+
+
+                    }
                 }
 
                 2 -> {
+                    Box {
                     Image(
                         painter = painterResource(id = R.drawable.kombi_seite),
                         contentDescription = "Login Image",
@@ -108,18 +194,173 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             .width(300.dp)
                             .height(700.dp)
                     )
+                        Column  {
+                            Spacer(modifier = Modifier.height(275.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(160.dp))
+                                //Innenraum Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Innenraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+
+                            }
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(70.dp))
+                                //Motorraum Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Motorraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(150.dp))
+                                //Außenspiegel Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Außenspiegel",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                            Row {
+                                Spacer(modifier = Modifier.width(25.dp))
+                                //Stoßstange vorne Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Stoßstange vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(50.dp))
+                                //Stoßstange vorne Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Stoßstange vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(70.dp))
+                                //Scheinwerfer vorne Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Scheinwerfer vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+
+                        }
                 }
+                }
+
                 3 -> {
-                    Image(
-                        painter = painterResource(id = R.drawable.kombi_heck),
-                        contentDescription = "Login Image",
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .width(300.dp)
-                            .height(700.dp)
-                    )
+                    Box {
+                        Image(
+                            painter = painterResource(id = R.drawable.kombi_heck),
+                            contentDescription = "Login Image",
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .width(300.dp)
+                                .height(700.dp)
+                        )
+                        Column {
+                            Spacer(modifier = Modifier.height(200.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(145.dp))
+                                //Innenraum Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Innenraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+
+                            }
+                            Spacer(modifier = Modifier.height(40.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(40.dp))
+                                //Motorraum Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Motorraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(20.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(70.dp))
+                                //Scheinwerfer vorne Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Scheinwerfer vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+
+
+                        }
+                    }
                 }
+
                 4 -> {
+                    Box {
                     Image(
                         painter = painterResource(id = R.drawable.kombi_seite2),
                         contentDescription = "Login Image",
@@ -128,6 +369,104 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             .width(300.dp)
                             .height(700.dp)
                     )
+                        Column  {
+                            Spacer(modifier = Modifier.height(280.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(115.dp))
+                                //Innenraum Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Innenraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+
+                            }
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(30.dp))
+                                //Motorraum Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Motorraum",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(150.dp))
+                                //Außenspiegel Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Außenspiegel",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(5.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(40.dp))
+                                //Stoßstange vorne Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Stoßstange vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(50.dp))
+                                //Stoßstange vorne Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Stoßstange vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(70.dp))
+                                //Scheinwerfer vorne Button
+                                IconButton(
+                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "Scheinwerfer vorne",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+
+                        }
+                }
                 }
             }
 
@@ -159,12 +498,13 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
 
     }
 
+
 }
 
-@Preview( showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun IllustKombiPreview() {
-    AutoCheckTheme{
+    AutoCheckTheme {
         IllustKombi(modifier = Modifier, navController = rememberNavController())
     }
 }
