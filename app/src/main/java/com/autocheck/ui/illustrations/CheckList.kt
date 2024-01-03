@@ -83,7 +83,7 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
                         val selectedOption = selectedOptions.value[teil]
                         val color = when (selectedOption) {
                             "Gut" -> Color.Green
-                            "Mittel" -> Color.Yellow
+                            "Mittel" -> Color(0xFFFFA500)
                             "Schlecht" -> Color.Red
                             else -> Color.Gray
                         }
@@ -102,94 +102,6 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
         }
     }
 }
-
-        /*Row(
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            radioOptions.forEach { zustand ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(
-                        selected = (zustand == selectedOption),
-                        onClick = { selectedOption = zustand }
-                    )
-                }
-            }
-            Column(
-
-            ) {
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(
-                    buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 24.sp,
-                            )
-                        )
-                        {
-                            append("Scheinwerfer: ")
-                        }
-
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Gray
-                            )
-                        )
-                        {
-                            append(selectedOption)
-                        }
-                    }
-                )
-            }
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            radioOptions.forEach { zustand ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(
-                        selected = (zustand == selectedOption2),
-                        onClick = { selectedOption2 = zustand }
-                    )
-                }
-            }
-            Column(
-
-            ) {
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(
-                    buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 24.sp
-                            )
-                        )
-                        {
-                            append("Motor: ")
-                        }
-
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Gray
-                            )
-                        )
-                        {
-                            append(selectedOption2)
-                        }
-                    }
-                )
-            }
-        }*/
-
-
-
-
-
-
-
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
