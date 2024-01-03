@@ -30,12 +30,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private val db by lazy { Room.databaseBuilder(
-        applicationContext,
-        AppDatabase::class.java, "autocheck.db"
-    ).build(
-    ) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

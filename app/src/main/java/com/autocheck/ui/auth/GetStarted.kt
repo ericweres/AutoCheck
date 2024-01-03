@@ -57,11 +57,11 @@ fun GetStarted(navController: NavHostController) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Holen Sie sich grafische/technische Hilfe für das Fahrzeug,\n" +
-                    "an dem Sie interessiert sind." +
-                    "Verschaffen Sie sich einen Preisüberblick über das Fahrzeug für eine sichere \n" +
-                    "Verhandlung." +
-                    "Sie erhalten ein Ranking-System für verschiedene Kategorien" +
+            text = "Holen Sie sich grafische/technische Hilfe für das Fahrzeug, " +
+                    "an dem Sie interessiert sind. " +
+                    "Verschaffen Sie sich einen Preisüberblick über das Fahrzeug für eine sichere " +
+                    "Verhandlung. " +
+                    "Sie erhalten ein Ranking-System für verschiedene Kategorien " +
                     "um die Fahrzeuge mit dem besten Preis/Leistungsverhältnis zu finden.",
             color = Color.Gray
         )
