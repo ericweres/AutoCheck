@@ -99,7 +99,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                     Box() {
                         Image(
                             painter = painterResource(id = R.drawable.kombi_front),
-                            contentDescription = "Login Image",
+                            contentDescription = "Frontseite",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
