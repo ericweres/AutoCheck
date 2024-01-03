@@ -35,11 +35,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun IllustKombi(modifier: Modifier, navController: NavHostController) {
     var wechsler by remember { mutableStateOf(1) }
-    //var wechsler = 1;
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -496,6 +498,37 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
             )
         }
 
+
+
+
+
+    }
+
+    Column (
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(
+            modifier = Modifier.height(600.dp),
+
+        )
+        Button(
+            onClick = { navController.navigate("checkList") },
+            modifier = Modifier
+                .width(302.dp)
+                .height(62.dp)
+            //.padding(16.dp)
+        ) {
+            Text(
+                text = "Checklist",
+                style = TextStyle(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight(700),
+                )
+            )
+        }
 
     }
 
