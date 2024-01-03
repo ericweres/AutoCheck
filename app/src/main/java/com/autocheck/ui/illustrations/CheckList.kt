@@ -59,9 +59,21 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
 
     LazyColumn(modifier = modifier) {
         items(carParts) { teil ->
+            val selectedOption = selectedOptions.value[teil]
+            val color = when (selectedOption) {
+                "Gut" -> Color.Green
+                "Mittel" -> Color(0xFFFFA500) // Orange als ARGB-Wert
+                "Schlecht" -> Color.Red
+                else -> Color.Gray
+            }
+
             Row(
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color.copy(alpha = 0.1f)) // Hintergrundfarbe mit geringer Deckkraft
+                    .padding(12.dp) // Abstand für jede Zeile
             ) {
                 radioOptions.forEach { zustand ->
                     val isSelected = selectedOptions.value[teil] == zustand
@@ -81,7 +93,7 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
                             append("$teil: ")
                         }
                         val selectedOption = selectedOptions.value[teil]
-                        val color = when (selectedOption) {
+                        val textColor = when (selectedOption) {
                             "Gut" -> Color.Green
                             "Mittel" -> Color(0xFFFFA500)
                             "Schlecht" -> Color.Red
@@ -91,10 +103,10 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
                             style = SpanStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = color
+                                color = textColor
                             )
                         ) {
-                            append(selectedOption ?: "")
+                            append(selectedOption ?: "N/A")
                         }
                     }
                 )
