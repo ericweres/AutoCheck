@@ -1,6 +1,7 @@
 package com.autocheck.ui.illustrations
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -64,8 +66,21 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
 
     LazyColumn(modifier = modifier) {
         items(carParts) { teil ->
+            val selectedOption = selectedOptions.value[teil] ?: 0
+            val backgroundColor = when (selectedOption) {
+                1 -> Color.Green.copy(alpha = 0.2f)
+                2 -> Color(0xFFFFA500).copy(alpha = 0.2f)
+                3 -> Color.Red.copy(alpha = 0.2f)
+                else -> Color.Transparent
+            }
+
             Row(
-                horizontalArrangement = Arrangement.SpaceAround,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = backgroundColor)
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                    //.border(1.dp, Color.Gray, shape = RoundedCornerShape(0.dp)),
+                horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 radioOptions.forEachIndexed { index, zustand ->
@@ -133,3 +148,4 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
         }
     }
 }
+

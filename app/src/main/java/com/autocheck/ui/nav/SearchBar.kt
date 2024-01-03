@@ -145,7 +145,7 @@ enum class ButtonType {
 }
 
 @Composable
-fun Search() {
+fun Search(modifier: Modifier) {
     val viewModel = viewModel<MainViewModel>()
     val searchText by viewModel.searchText.collectAsState()
     val vehicles by viewModel.vehicles.collectAsState()
@@ -159,6 +159,7 @@ fun Search() {
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(50.dp))
         TextField(
             value = searchText,
             onValueChange = {
@@ -258,6 +259,6 @@ fun Search() {
 @Preview(showBackground = true)
 @Composable
 fun SearchPreview() {
-    Search()
+    Search(modifier = Modifier)
 }
 

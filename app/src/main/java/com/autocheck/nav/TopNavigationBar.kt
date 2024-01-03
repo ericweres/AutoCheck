@@ -2,6 +2,7 @@ package com.autocheck.nav
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,12 +28,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.autocheck.R
 import com.autocheck.ui.theme.AutoCheckTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopNavigationBar(modifier: Modifier = Modifier) {
+fun TopNavigationBar(modifier: Modifier = Modifier, navController: NavHostController) {
     TopAppBar(
         title = {},
         navigationIcon = {
@@ -49,7 +52,9 @@ fun TopNavigationBar(modifier: Modifier = Modifier) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = "Search",
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .clickable { navController.navigate("search") }
             )
             Spacer(Modifier.width(16.dp))
             Icon(
@@ -71,6 +76,6 @@ fun TopNavigationBar(modifier: Modifier = Modifier) {
 @Composable
 fun TopNavigationBarPreview() {
     AutoCheckTheme {
-        TopNavigationBar()
+        TopNavigationBar(modifier = Modifier, navController = rememberNavController())
     }
 }
