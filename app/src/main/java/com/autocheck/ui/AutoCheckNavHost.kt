@@ -15,6 +15,7 @@ import com.autocheck.ui.auth.LoginScreen
 import com.autocheck.ui.auth.RegisterScreen
 import com.autocheck.ui.illustrations.CheckList
 import com.autocheck.ui.illustrations.IllustKombi
+import com.autocheck.ui.nav.Search
 
 @Composable
 fun AutoCheckNavHost(
@@ -70,7 +71,16 @@ fun AutoCheckNavHost(
                     navController
                 )
             }
+        }
 
+        composable( route = "search") {
+            Scaffold(
+                bottomBar = { BottomNavigationBar() },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController) },
+            ) { innerPadding ->
+                Search(modifier = Modifier.padding(innerPadding))
+            }
         }
 
     }

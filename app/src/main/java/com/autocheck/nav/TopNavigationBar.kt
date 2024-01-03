@@ -54,7 +54,7 @@ fun TopNavigationBar(modifier: Modifier = Modifier, navController: NavHostContro
                 contentDescription = "Search",
                 modifier = Modifier
                     .size(24.dp)
-                    .clickable { navController.navigate("getStarted") }
+                    .clickable { navController.navigate("search") }
             )
             Spacer(Modifier.width(16.dp))
             Icon(
