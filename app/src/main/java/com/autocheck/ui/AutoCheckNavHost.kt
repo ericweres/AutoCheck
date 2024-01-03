@@ -38,7 +38,8 @@ fun AutoCheckNavHost(
        composable( route = "home") {
            Scaffold(
                bottomBar = { BottomNavigationBar() },
-               topBar = { TopNavigationBar() },
+               topBar = { TopNavigationBar(modifier = Modifier,
+                   navController) },
            ) { innerPadding ->
                 HomeScreen(
                    modifier = Modifier.padding(innerPadding)
@@ -48,7 +49,8 @@ fun AutoCheckNavHost(
         composable( route = "kombi") {
             Scaffold(
                 bottomBar = { BottomNavigationBar() },
-                topBar = { TopNavigationBar() },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController) },
             ) { innerPadding ->
                 IllustKombi(
                     modifier = Modifier.padding(innerPadding),
@@ -60,7 +62,8 @@ fun AutoCheckNavHost(
         composable( route = "checkList") {
             Scaffold(
                 bottomBar = { BottomNavigationBar() },
-                topBar = { TopNavigationBar() },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController) },
             ) { innerPadding ->
                 CheckList(
                     modifier = Modifier.padding(innerPadding),

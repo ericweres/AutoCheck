@@ -97,7 +97,9 @@ fun LoginScreen(navController: NavHostController) {
             onClick = { navController.navigate("kombi") },
             modifier = Modifier
                 .width(302.dp)
-                .height(62.dp)
+                .height(62.dp),
+
+
         ) {
             Text(
                 text = "Login",
