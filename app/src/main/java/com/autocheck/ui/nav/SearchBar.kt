@@ -113,63 +113,6 @@ private val allAVehicles = listOf(
 
 
 @Composable
-fun CustomCameraButton(onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .size(56.dp)
-            .clip(CircleShape)
-            .background(Color.Transparent)
-            .clickable { onClick() }
-    ) {
-        Icon(
-            imageVector = Icons.Default.Camera,
-            contentDescription = "Camera Icon",
-            tint = Color.White,
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxSize()
-                .align(Alignment.CenterEnd)
-        )
-    }
-}
-
-@Composable
-fun CustomTransparentButton(onClick: () -> Unit) {
-    Button(
-        onClick = { onClick() },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.primary
-        ),
-        contentPadding = PaddingValues(16.dp),
-    ) {
-        Icon(
-            imageVector = Icons.Default.Send,
-            contentDescription = "Send Icon",
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
-}
-
-@Composable
-fun TransparentButtonWithCameraIcon(onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Gray, shape = CircleShape)
-        ) {
-            CustomTransparentButton(onClick = onClick)
-            Spacer(modifier = Modifier.width(8.dp))
-            CustomCameraButton(onClick = {})
-        }
-    }
-}
-@Composable
 fun MyButton(
     type: ButtonType,
     onClick: () -> Unit,
@@ -221,6 +164,7 @@ fun Search() {
             onValueChange = {
                 viewModel.onSearchTextChange(it)
                 //isSearchBarClicked = true
+
             },
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text(text = "Search") }
