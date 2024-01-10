@@ -3,12 +3,14 @@ package com.autocheck.ui.illustrations
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
@@ -39,14 +41,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 
 @Composable
-fun IllustKombi(modifier: Modifier, navController: NavHostController) {
+fun IllustBike(modifier: Modifier, navController: NavHostController) {
     var wechsler by remember { mutableStateOf(1) }
     var isIconChanged by remember { mutableStateOf(true) }
     var isIconChanged2 by remember { mutableStateOf(true) }
-    var isIconChanged3 by remember { mutableStateOf(true) }
     var showDialog by remember { mutableStateOf(false) }
     var showDialog2 by remember { mutableStateOf(false) }
-    var showDialog3 by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -91,8 +91,6 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                 {
                     wechsler = when (wechsler) {
                         1 -> 2
-                        2 -> 3
-                        3 -> 4
                         else -> 1
                     }
                 }
@@ -103,18 +101,31 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                 1 -> {
                     Box() {
                         Image(
-                            painter = painterResource(id = R.drawable.kombi_front),
+                            painter = painterResource(id = R.drawable.motorrad_front),
                             contentDescription = "Frontseite",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
-                                .height(700.dp)
+                                .height(680.dp)
                         )
                         Column {
-                            Spacer(modifier = Modifier.height(230.dp))
+                            Spacer(modifier = Modifier.height(200.dp))
                             Row {
-                                Spacer(modifier = Modifier.width(125.dp))
+                                Spacer(modifier = Modifier.width(90.dp))
                                 //Innenraum Button
+                                IconButton(
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "",
+                                        tint = Color.Red,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(70.dp))
+                                //Außenspiegel Button
                                 IconButton(
                                     onClick = {
                                         showDialog = true;
@@ -128,27 +139,13 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                     if (isIconChanged) {
                                         Icon(
                                             painter = painterResource(id = R.drawable.ic_search),
-                                            contentDescription = "Innenraum",
+                                            contentDescription = "Cockpit",
                                             tint = Color.Red,
                                         )
                                     } else Icon(
                                         painter = painterResource(id = R.drawable.ic_checkmark),
-                                        contentDescription = "Innenraum checked",
+                                        contentDescription = "Cockpit checked",
                                         tint = Color.Green,
-                                    )
-
-                                }
-                                Spacer(modifier = Modifier.width(85.dp))
-                                //Außenspiegel Button
-                                IconButton(
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Außenspiegel",
-                                        tint = Color.Red,
                                     )
                                 }
                             }
@@ -156,49 +153,40 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 Spacer(modifier = Modifier.width(120.dp))
                                 //Motorraum Button
                                 IconButton(
-                                    modifier = Modifier.size(28.dp),
+                                    onClick = { /*TODO*/ },
+
+                                    )
+                                {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_search),
+                                        contentDescription = "",
+                                        tint = Color.Red,
+                                    )
+                                }
+                            }
+                            Spacer(modifier=Modifier.height(20.dp))
+                            Row {
+                                Spacer(modifier = Modifier.width(230.dp))
+                                //Scheinwerfer vorne Button
+                                IconButton(
                                     onClick = {
                                         showDialog2 = true
                                         if (isIconChanged2) {
                                             isIconChanged2 = !isIconChanged2
                                         }
-                                    }
-                                ) {
+                                    },
+
+                                    )
+                                {
                                     if (isIconChanged2) {
                                         Icon(
                                             painter = painterResource(id = R.drawable.ic_search),
-                                            contentDescription = "Motorraum",
+                                            contentDescription = "Reifen",
                                             tint = Color.Red,
                                         )
                                     } else Icon(
                                         painter = painterResource(id = R.drawable.ic_checkmark),
-                                        contentDescription = "Motorraum checked",
-                                        tint = Color.Green,
-                                    )
-                                }
-
-                            }
-                            Row {
-                                Spacer(modifier = Modifier.width(230.dp))
-                                //Scheinwerfer vorne Button
-                                IconButton(
-                                    modifier = Modifier.size(28.dp),
-                                    onClick = {
-                                        showDialog3 = true
-                                        if (isIconChanged3) {
-                                            isIconChanged3 = !isIconChanged3
-                                        }
-                                    }
-                                ) {
-                                    if (isIconChanged3) {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.ic_search),
-                                            contentDescription = "Scheinwerfer vorne",
-                                            tint = Color.Red,
-                                        )
-                                    } else Icon(
-                                        painter = painterResource(id = R.drawable.ic_checkmark),
-                                        contentDescription = "Scheinwerfer vorne checked",
+                                        contentDescription = "Reifen checked",
                                         tint = Color.Green,
                                     )
                                 }
@@ -213,7 +201,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
+                                        contentDescription = "",
                                         tint = Color.Red,
                                     )
                                 }
@@ -227,14 +215,14 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                 2 -> {
                     Box {
                         Image(
-                            painter = painterResource(id = R.drawable.kombi_seite2),
-                            contentDescription = "Login Image",
+                            painter = painterResource(id = R.drawable.motorrad_hinten),
+                            contentDescription = "Motor hinten",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
-                                .height(700.dp)
+                                .height(680.dp)
                         )
-                        Column {
+                        Column  {
                             Spacer(modifier = Modifier.height(280.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(115.dp))
@@ -334,183 +322,10 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                     }
                 }
 
-                3 -> {
-                    Box {
-                        Image(
-                            painter = painterResource(id = R.drawable.kombi_heck),
-                            contentDescription = "Login Image",
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier
-                                .width(300.dp)
-                                .height(700.dp)
-                        )
-                        Column {
-                            Spacer(modifier = Modifier.height(200.dp))
-                            Row {
-                                Spacer(modifier = Modifier.width(145.dp))
-                                //Innenraum Button
-                                IconButton(
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Innenraum",
-                                        tint = Color.Red,
-                                    )
-                                }
-
-                            }
-                            Spacer(modifier = Modifier.height(40.dp))
-                            Row {
-                                Spacer(modifier = Modifier.width(40.dp))
-                                //Motorraum Button
-                                IconButton(
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Motorraum",
-                                        tint = Color.Red,
-                                    )
-                                }
-                            }
-                            Spacer(modifier = Modifier.height(20.dp))
-                            Row {
-                                Spacer(modifier = Modifier.width(70.dp))
-                                //Scheinwerfer vorne Button
-                                IconButton(
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Scheinwerfer vorne",
-                                        tint = Color.Red,
-                                    )
-                                }
-                            }
 
 
-                        }
-                    }
-                }
 
-                4 -> {
-
-                    Box {
-                        Image(
-                            painter = painterResource(id = R.drawable.kombi_seite),
-                            contentDescription = "Login Image",
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier
-                                .width(300.dp)
-                                .height(700.dp)
-                        )
-                        Column {
-                            Spacer(modifier = Modifier.height(275.dp))
-                            Row {
-                                Spacer(modifier = Modifier.width(160.dp))
-                                //Innenraum Button
-                                IconButton(
-                                    modifier = Modifier.size(28.dp),
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Innenraum",
-                                        tint = Color.Red,
-                                    )
-                                }
-
-                            }
-                            Spacer(modifier = Modifier.height(15.dp))
-                            Row {
-                                Spacer(modifier = Modifier.width(70.dp))
-                                //Motorraum Button
-                                IconButton(
-                                    modifier = Modifier.size(28.dp),
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Motorraum",
-                                        tint = Color.Red,
-                                    )
-                                }
-                                Spacer(modifier = Modifier.width(150.dp))
-                                //Außenspiegel Button
-                                IconButton(
-                                    modifier = Modifier.size(28.dp),
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Außenspiegel",
-                                        tint = Color.Red,
-                                    )
-                                }
-                            }
-                            Row {
-                                Spacer(modifier = Modifier.width(25.dp))
-                                //Stoßstange vorne Button
-                                IconButton(
-                                    modifier = Modifier.size(28.dp),
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
-                                        tint = Color.Red,
-                                    )
-                                }
-                                Spacer(modifier = Modifier.width(50.dp))
-                                //Stoßstange vorne Button
-                                IconButton(
-                                    modifier = Modifier.size(28.dp),
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
-                                        tint = Color.Red,
-                                    )
-                                }
-                                Spacer(modifier = Modifier.width(70.dp))
-                                //Scheinwerfer vorne Button
-                                IconButton(
-                                    modifier = Modifier.size(28.dp),
-                                    onClick = { /*TODO*/ },
-
-                                    )
-                                {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Scheinwerfer vorne",
-                                        tint = Color.Red,
-                                    )
-                                }
-                            }
-
-                        }
-                    }
-                }
             }
-
 
 
 
@@ -528,9 +343,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                 onClick =
                 {
                     wechsler = when (wechsler) {
-                        1 -> 4
-                        4 -> 3
-                        3 -> 2
+                        1 -> 2
                         else -> 1
                     }
                 }
@@ -538,9 +351,12 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
         }
 
 
+
+
+
     }
 
-    Column(
+    Column (
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -573,7 +389,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
             // onDismissRequest wird aufgerufen, wenn der Dialog verworfen wird
             onDismissRequest = { showDialog = false },
             // Titel des Popups
-            title = { Text(text = "Innenraum") },
+            title = { Text(text = "Cockpit") },
             // Inhalt des Popups mit einem Bild und einem Text
             text = {
                 // Eine Spalte mit einem Bild und Text
@@ -583,25 +399,14 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                 ) {
                     // Das Bild im Popup
                     Image(
-                        painter = painterResource(id = R.drawable.innenraum), // Hier Bildressource einfügen
-                        contentDescription = "Innenraum"
+                        painter = painterResource(id = R.drawable.cockpit), // Hier Bildressource einfügen
+                        contentDescription = "Cockpit"
                     )
                     // Leerraum zwischen dem Bild und dem Text
                     Spacer(modifier = Modifier.height(16.dp))
                     // Text im Popup
                     Text(
-                        text = "1. Rückspiegel: sollte fest sein und nicht angelaufen sein \n" +
-                                "2. Display: sollte funktionieren \n" +
-                                "3. Handschuhfach: sollte kein Risse enthalten \n" +
-                                "4. Luftdüsen: sollte kalte bzw. warme Luft fördern \n" +
-                                "5. Warnblinklage: sollte funktionieren \n" +
-                                "6. Klimaanlage: alle Funktionen sollten funktionieren \n" +
-                                "7. Infotainment: sollte funktionieren \n" +
-                                "8. Navigationstasten: sollten funktionieren \n" +
-                                "9. Schaltsack: sollte keine Risse haben \n" +
-                                "10. ESP: sollte aktivierbar sein \n" +
-                                "11. Handbremse: sollte anziehbar sein \n" +
-                                "12. Schaltknauf: die Gänge sollte alle anwählbar sein"
+                        text = "Text cockpit"
                     )
                 }
             },
@@ -622,7 +427,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
             // onDismissRequest wird aufgerufen, wenn der Dialog verworfen wird
             onDismissRequest = { showDialog = false },
             // Titel des Popups
-            title = { Text(text = "Motorraum") },
+            title = { Text(text = "Reifen") },
             // Inhalt des Popups mit einem Bild und einem Text
             text = {
                 // Eine Spalte mit einem Bild und Text
@@ -632,14 +437,14 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                 ) {
                     // Das Bild im Popup
                     Image(
-                        painter = painterResource(id = R.drawable.motorraum), // Hier Bildressource einfügen
-                        contentDescription = "Motorraum"
+                        painter = painterResource(id = R.drawable.reifen), // Hier Bildressource einfügen
+                        contentDescription = "Reifen"
                     )
                     // Leerraum zwischen dem Bild und dem Text
                     Spacer(modifier = Modifier.height(16.dp))
                     // Text im Popup
                     Text(
-                        text = "Der Motorraum eines Autos beherbergt das Herzstück des Fahrzeugs: den Motor. Hier sind verschiedene Komponenten wie der Motor selbst, der Luftfilter, der Öltank und andere wichtige Teile untergebracht. Regelmäßige Wartung ist entscheidend, um die Leistung und Langlebigkeit des Motors zu gewährleisten. Dazu gehören Ölwechsel, Kontrolle des Kühlwassers und die Überprüfung der Riemen und Schläuche auf Verschleiß. Eine saubere und gut gewartete Motorumgebung trägt dazu bei, dass das Auto reibungslos läuft und eine längere Lebensdauer hat."
+                        text = "Reifen Text"
                     )
                 }
             },
@@ -655,53 +460,13 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
         )
     }
 
-    if (showDialog3) {
-        AlertDialog(
-            // onDismissRequest wird aufgerufen, wenn der Dialog verworfen wird
-            onDismissRequest = { showDialog = false },
-            // Titel des Popups
-            title = { Text(text = "Scheinwerfer Vorne") },
-            // Inhalt des Popups mit einem Bild und einem Text
-            text = {
-                // Eine Spalte mit einem Bild und Text
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    // Das Bild im Popup
-                    Image(
-                        painter = painterResource(id = R.drawable.scheinwerfer), // Hier Bildressource einfügen
-                        contentDescription = "Scheinwerfer vorne"
-                    )
-                    // Leerraum zwischen dem Bild und dem Text
-                    Spacer(modifier = Modifier.height(16.dp))
-                    // Text im Popup
-                    Text(
-                        text = "Autoscheinwerfer vorne sind essentiell für die Sichtbarkeit und Sicherheit bei Nacht oder schlechten Wetterbedingungen. Es gibt zwei Haupttypen: Halogen- und LED-Scheinwerfer. Halogenlichter sind kostengünstiger, während LEDs energieeffizienter und langlebiger sind. Die richtige Ausrichtung ist wichtig, um eine gute Sicht zu gewährleisten, ohne andere Fahrer zu blenden. Unterschiedliche Funktionen wie Fernlicht, Abblendlicht und Nebelscheinwerfer optimieren die Ausleuchtung in verschiedenen Situationen."
-                    )
-                }
-            },
-            // Bestätigungsbutton im Popup
-            confirmButton = {
-                Button(
-                    onClick = { showDialog3 = false }
-
-                ) {
-                    Text(text = "Zurück")
-                }
-            },
-        )
-    }
-
 
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun IllustKombiPreview() {
+fun IllustBikePreview() {
     AutoCheckTheme {
-        IllustKombi(modifier = Modifier, navController = rememberNavController())
+        IllustBike(modifier = Modifier, navController = rememberNavController())
     }
 }
-
-

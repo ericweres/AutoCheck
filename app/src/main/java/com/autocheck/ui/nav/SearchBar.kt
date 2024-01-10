@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -145,7 +147,7 @@ enum class ButtonType {
 }
 
 @Composable
-fun Search(modifier: Modifier) {
+fun Search(modifier: Modifier, navController: NavHostController) {
     val viewModel = viewModel<MainViewModel>()
     val searchText by viewModel.searchText.collectAsState()
     val vehicles by viewModel.vehicles.collectAsState()
@@ -185,6 +187,7 @@ fun Search(modifier: Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
+
             ) {
                 items(vehicles.take(3)) { vehicle ->
                     Text(
@@ -205,17 +208,20 @@ fun Search(modifier: Modifier) {
             verticalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { navController.navigate("kombi") },
                 modifier = Modifier
                     .background(color = Color.White)
                     .padding(10.dp)
                     .fillMaxWidth(0.48f)
+
             ) {
                 Icon(
                     imageVector = Icons.Default.DirectionsCar, // Hier kannst du ein anderes Icon verwenden
                     contentDescription = "",
                     tint = Color.White,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier
+                        .size(24.dp)
+
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
@@ -232,18 +238,21 @@ fun Search(modifier: Modifier) {
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 Button(
-                    onClick = { /* Handle button click */ },
+                    onClick = { navController.navigate("bike") },
                     modifier = Modifier
                         .background(color = Color.White)
                         .padding(10.dp)
                         .fillMaxWidth(0.48f)
+
                         
                 ) {
                     Icon(
                         imageVector = Icons.Default.Motorcycle, // Hier kannst du ein anderes Icon verwenden
                         contentDescription = "",
                         tint = Color.White,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier
+                            .size(24.dp)
+
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
@@ -259,6 +268,6 @@ fun Search(modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun SearchPreview() {
-    Search(modifier = Modifier)
+    Search(modifier = Modifier, navController = rememberNavController())
 }
 
