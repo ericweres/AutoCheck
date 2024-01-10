@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.autocheck.nav.BottomNavigationBar
-import com.autocheck.nav.TopNavigationBar
+import com.autocheck.ui.nav.BottomNavigationBar
+import com.autocheck.ui.nav.TopNavigationBar
 import com.autocheck.ui.auth.GetStarted
 import com.autocheck.ui.auth.LoginScreen
 import com.autocheck.ui.auth.RegisterScreen

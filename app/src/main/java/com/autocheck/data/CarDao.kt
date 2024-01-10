@@ -10,18 +10,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CarDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCar(car: Car): Long
-
     @Query("SELECT * FROM Car")
     fun getAllCars(): Flow<List<Car>>
 
-    @Query("SELECT * FROM Car WHERE carId = :carId")
-    suspend fun getCarById(carId: Int): Car
-
-    @Update
-    suspend fun updateCar(car: Car)
-
-    @Delete
-    suspend fun deleteCar(car: Car)
+    @Query("SELECT * FROM Car WHERE name = :name")
+    suspend fun getCarByName(name: String): Flow<List<Car>>
 }

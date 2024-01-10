@@ -3,7 +3,9 @@ package com.autocheck.di
 import android.content.Context
 import androidx.room.Room
 import com.autocheck.data.AppDatabase
+import com.autocheck.data.CarDao
 import com.autocheck.data.ChecklistDao
+import com.autocheck.data.GarageDao
 import com.autocheck.data.UserDao
 import dagger.Module
 import dagger.Provides
@@ -34,5 +36,15 @@ object DatabaseModule {
     @Provides
     fun provideChecklistDao(appDatabase: AppDatabase): ChecklistDao {
         return appDatabase.checklistDao()
+    }
+
+    @Provides
+    fun provideGarageDao(appDatabase: AppDatabase): GarageDao {
+        return appDatabase.garageDao()
+    }
+
+    @Provides
+    fun provideCarDao(appDatabase: AppDatabase): CarDao {
+        return appDatabase.carDao()
     }
 }

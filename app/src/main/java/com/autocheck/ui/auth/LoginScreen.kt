@@ -40,6 +40,12 @@ fun LoginScreen(navController: NavHostController) {
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
 
+    val isFormValid by remember {
+        derivedStateOf {
+            email.isNotEmpty() && password.isNotEmpty()
+        }
+    }
+
     var errorMessage by remember { mutableStateOf("") }
 
     val viewModel: UserViewModel = hiltViewModel()
@@ -114,7 +120,7 @@ fun LoginScreen(navController: NavHostController) {
             modifier = Modifier
                 .width(302.dp)
                 .height(62.dp),
-
+            enabled = isFormValid
 
         ) {
             Text(
