@@ -1,5 +1,6 @@
 package com.autocheck.ui.nav
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
@@ -13,6 +14,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.autocheck.R
 import com.autocheck.ui.theme.AutoCheckTheme
 
@@ -20,12 +23,12 @@ import com.autocheck.ui.theme.AutoCheckTheme
 @Composable
 fun BottomNavigationBarPreview() {
     AutoCheckTheme {
-        BottomNavigationBar()
+        BottomNavigationBar(navController = rememberNavController())
     }
 }
 
 @Composable
-fun BottomNavigationBar(modifier: Modifier = Modifier) {
+fun BottomNavigationBar(modifier: Modifier = Modifier, navController: NavHostController) {
     // Get screen height
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     // Calculate 10% of screen height
@@ -46,6 +49,7 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_werkstatt),
                     contentDescription = null,
+                    modifier = Modifier.clickable { navController.navigate("werkstaetten")  }
                 )
             },
             label = {
