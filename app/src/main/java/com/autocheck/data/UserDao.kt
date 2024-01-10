@@ -19,8 +19,8 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE userId IN (:userIds)")
     fun loadAllByIds(userIds: IntArray): Flow<List<User>>
 
-    @Query("SELECT * FROM user WHERE username LIKE :username LIMIT 1")
-    suspend fun findByUsername(username: String): User
+    @Query("SELECT * FROM user WHERE email LIKE :email LIMIT 1")
+    suspend fun findByEmail(email: String): User?
 
     @Insert
     suspend fun insert(user: User)

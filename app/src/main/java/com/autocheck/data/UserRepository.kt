@@ -10,5 +10,8 @@ class UserRepository @Inject constructor(private val userDao: UserDao) {
         userDao.insert(newUser)
     }
 
+    suspend fun getUserByEmail(email: String): User? {
+        return userDao.findByEmail(email)
+    }
     fun getAllUsers(): Flow<List<User>> = userDao.getAllUsers()
 }

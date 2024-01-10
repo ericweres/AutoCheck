@@ -78,6 +78,8 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.49")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
+    // bcrypt (used for hashing a password)
+    implementation("org.mindrot:jbcrypt:0.4")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

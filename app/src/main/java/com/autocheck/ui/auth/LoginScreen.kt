@@ -27,10 +27,12 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.autocheck.R
 import com.autocheck.ui.theme.AutoCheckTheme
 import androidx.navigation.compose.rememberNavController
+import com.autocheck.viewmodel.UserViewModel
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
@@ -38,6 +40,9 @@ fun LoginScreen(navController: NavHostController) {
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
 
+    var errorMessage by remember { mutableStateOf("") }
+
+    val viewModel: UserViewModel = hiltViewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -93,8 +98,19 @@ fun LoginScreen(navController: NavHostController) {
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
+        if (errorMessage != "") {
+            Text(text = errorMessage, color = Color.Red)
+        }
         Button(
-            onClick = { navController.navigate("kombi") },
+            onClick = {
+                viewModel.loginUser(email, password) { isSuccess ->
+                    if (isSuccess) {
+                        navController.navigate("home")
+                    } else {
+                        errorMessage = "Login fehlgeschlagen."
+                    }
+                }
+                      },
             modifier = Modifier
                 .width(302.dp)
                 .height(62.dp),

@@ -10,12 +10,14 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -44,7 +46,60 @@ fun RegisterScreen(navController: NavHostController) {
     var confirmPassword by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
 
+    var usernameError by remember { mutableStateOf("") }
+    var emailError by remember { mutableStateOf("") }
+    var passwordError by remember { mutableStateOf("") }
+
+    var usernameTouched by remember { mutableStateOf(false) }
+    var emailTouched by remember { mutableStateOf(false) }
+    var passwordTouched by remember { mutableStateOf(false)   }
+
+    val isFormValid by remember {
+        derivedStateOf {
+            emailError.isEmpty() && usernameError.isEmpty() && passwordError.isEmpty()
+        }
+    }
+
     val viewModel: UserViewModel = hiltViewModel()
+
+    fun validateUsername(): Boolean {
+        return if (username.isBlank()) {
+            usernameError = "Bitte Username eingeben"
+            false
+        } else {
+            usernameError = ""
+            true
+        }
+    }
+
+    fun validatePassword() {
+        passwordError = when {
+            password.isBlank() || confirmPassword.isBlank() -> {
+                "Bitte Passwort eingeben"
+            }
+            password != confirmPassword -> {
+                "Passwörter stimmen nicht überein"
+            }
+            else -> {
+                ""
+            }
+        }
+    }
+
+    fun validateEmail(): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+" // Simple email regex pattern
+        val isValidEmail = email.matches(Regex(emailPattern))
+
+        emailError = if (email.isBlank()) {
+            "Bitte Email eingeben"
+        } else if (!isValidEmail) {
+            "Bitte gültige Email eingeben"
+        } else {
+            ""
+        }
+        return isValidEmail && email.isNotEmpty()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -68,26 +123,48 @@ fun RegisterScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(50.dp))
         OutlinedTextField(
             value = username,
-            onValueChange = { username = it },
+            onValueChange = {
+                username = it
+                usernameTouched = true
+                validateUsername()
+            },
             label = { Text("name") },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
-        )
 
+            isError = usernameTouched && usernameError.isNotEmpty(),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        )
+        if (usernameTouched && usernameError.isNotEmpty()) {
+            Text(usernameError, color = MaterialTheme.colorScheme.error)
+        }
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = {
+                email = it
+                emailTouched = true
+                validateEmail()
+            },
             label = { Text("email") },
+            isError = emailTouched && emailError.isNotEmpty(),
             singleLine = true,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         )
+        if (emailTouched && emailError.isNotEmpty()) {
+            Text(emailError, color = MaterialTheme.colorScheme.error)
+        }
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = {
+                password = it
+                passwordTouched = true
+                validatePassword()
+
+            },
             label = { Text("password") },
             singleLine = true,
+            isError = passwordTouched && passwordError.isNotEmpty(),
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             trailingIcon = {
@@ -105,9 +182,13 @@ fun RegisterScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = confirmPassword,
-            onValueChange = { confirmPassword = it },
+            onValueChange = {
+                confirmPassword = it
+                validatePassword()
+                            },
             label = { Text("confirm password") },
             singleLine = true,
+            isError = passwordTouched && passwordError.isNotEmpty(),
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             trailingIcon = {
@@ -119,18 +200,28 @@ fun RegisterScreen(navController: NavHostController) {
                 IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
                     Icon(image, "Toggle password visibility")
                 }
-            }
+            },
+            modifier = Modifier
+                .onFocusChanged { focusState ->
+                    if (!focusState.isFocused) {
+                        validatePassword()
+                    }
+                }
         )
+        if (passwordTouched && passwordError.isNotEmpty()) {
+            Text(passwordError, color = MaterialTheme.colorScheme.error)
+        }
 
         Spacer(modifier = Modifier.height(100.dp))
         Button(
             onClick = {
                         viewModel.addUser(username, email, password)
-                        navController.navigate("home")
+                        navController.navigate("login")
                       },
             modifier = Modifier
                 .width(302.dp)
-                .height(62.dp)
+                .height(62.dp),
+            enabled = isFormValid,
         ) {
             Text(
                 text = "Registrieren",
@@ -146,13 +237,6 @@ fun RegisterScreen(navController: NavHostController) {
                 color = Color.Blue
             )
         }
-    }
-}
 
-@Preview( showBackground = true, showSystemUi = true,)
-@Composable
-fun RegisterScreenPreview() {
-    AutoCheckTheme{
-        RegisterScreen(navController = rememberNavController())
     }
 }
