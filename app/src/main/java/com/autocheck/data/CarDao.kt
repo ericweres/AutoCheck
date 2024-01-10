@@ -14,5 +14,5 @@ interface CarDao {
     fun getAllCars(): Flow<List<Car>>
 
     @Query("SELECT * FROM Car WHERE name = :name")
-    suspend fun getCarByName(name: String): Flow<List<Car>>
+    fun getCarByName(name: String): Flow<List<Car>>
 }
