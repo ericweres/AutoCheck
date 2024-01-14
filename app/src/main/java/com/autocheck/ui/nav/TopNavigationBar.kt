@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -25,9 +27,9 @@ import com.autocheck.ui.theme.AutoCheckTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopNavigationBar(modifier: Modifier = Modifier, navController: NavHostController) {
-    TopAppBar(
-        title = {},
+fun TopNavigationBar(modifier: Modifier = Modifier, navController: NavHostController, title: String) {
+    CenterAlignedTopAppBar(
+        title = { Text(title)},
         navigationIcon = {
             Image(
                 painter = painterResource(id = R.drawable.profile),
@@ -56,18 +58,10 @@ fun TopNavigationBar(modifier: Modifier = Modifier, navController: NavHostContro
             )
             Spacer(Modifier.width(16.dp))
         },
-        colors = TopAppBarDefaults.mediumTopAppBarColors(
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = Color(0xFF5BDABB), // Adjust the color to match your design
-            titleContentColor = Color.White,
+            titleContentColor = Color.Black,
             actionIconContentColor = Color.Black
         )
     )
-}
-
-@Preview
-@Composable
-fun TopNavigationBarPreview() {
-    AutoCheckTheme {
-        TopNavigationBar(modifier = Modifier, navController = rememberNavController())
-    }
 }
