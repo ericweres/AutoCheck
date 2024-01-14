@@ -119,11 +119,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                                 //Innenraum Button
                                 IconButton(
                                     onClick = {
-                                        showDialog = true;
-                                        if (isIconChanged) {
-                                            isIconChanged = !isIconChanged
-                                        }
-                                    },
+                                        showDialog = true },
 
                                     )
                                 {
@@ -160,11 +156,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = {
-                                        showDialog2 = true
-                                        if (isIconChanged2) {
-                                            isIconChanged2 = !isIconChanged2
-                                        }
-                                    }
+                                        showDialog2 = true }
                                 ) {
                                     if (isIconChanged2) {
                                         Icon(
@@ -186,11 +178,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = {
-                                        showDialog3 = true
-                                        if (isIconChanged3) {
-                                            isIconChanged3 = !isIconChanged3
-                                        }
-                                    }
+                                        showDialog3 = true }
                                 ) {
                                     if (isIconChanged3) {
                                         Icon(
@@ -237,7 +225,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                                 .height(700.dp)
                         )
                         Column {
-                            Spacer(modifier = Modifier.height(280.dp))
+                            Spacer(modifier = Modifier.height(260.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(115.dp))
                                 //Innenraum Button
@@ -340,7 +328,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                     Box {
                         Image(
                             painter = painterResource(id = R.drawable.kombi_heck),
-                            contentDescription = "Login Image",
+                            contentDescription = "heck",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
@@ -407,14 +395,14 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                     Box {
                         Image(
                             painter = painterResource(id = R.drawable.kombi_seite),
-                            contentDescription = "Login Image",
+                            contentDescription = "Links",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
                                 .height(700.dp)
                         )
                         Column {
-                            Spacer(modifier = Modifier.height(275.dp))
+                            Spacer(modifier = Modifier.height(265.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(160.dp))
                                 //Innenraum Button
@@ -592,25 +580,17 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                     Spacer(modifier = Modifier.height(16.dp))
                     // Text im Popup
                     Text(
-                        text = "1. Rückspiegel: sollte fest sein und nicht angelaufen sein \n" +
-                                "2. Display: sollte funktionieren \n" +
-                                "3. Handschuhfach: sollte kein Risse enthalten \n" +
-                                "4. Luftdüsen: sollte kalte bzw. warme Luft fördern \n" +
-                                "5. Warnblinklage: sollte funktionieren \n" +
-                                "6. Klimaanlage: alle Funktionen sollten funktionieren \n" +
-                                "7. Infotainment: sollte funktionieren \n" +
-                                "8. Navigationstasten: sollten funktionieren \n" +
-                                "9. Schaltsack: sollte keine Risse haben \n" +
-                                "10. ESP: sollte aktivierbar sein \n" +
-                                "11. Handbremse: sollte anziehbar sein \n" +
-                                "12. Schaltknauf: die Gänge sollte alle anwählbar sein"
+                        text = carInnen
                     )
                 }
             },
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog = false }
+                    onClick = { showDialog = false;
+                        if (isIconChanged) {
+                        isIconChanged = !isIconChanged
+                    } }
 
                 ) {
                     Text(text = "Zurück")
@@ -641,14 +621,17 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                     Spacer(modifier = Modifier.height(16.dp))
                     // Text im Popup
                     Text(
-                        text = "Der Motorraum eines Autos beherbergt das Herzstück des Fahrzeugs: den Motor. Hier sind verschiedene Komponenten wie der Motor selbst, der Luftfilter, der Öltank und andere wichtige Teile untergebracht. Regelmäßige Wartung ist entscheidend, um die Leistung und Langlebigkeit des Motors zu gewährleisten. Dazu gehören Ölwechsel, Kontrolle des Kühlwassers und die Überprüfung der Riemen und Schläuche auf Verschleiß. Eine saubere und gut gewartete Motorumgebung trägt dazu bei, dass das Auto reibungslos läuft und eine längere Lebensdauer hat."
+                        text = carMotor
                     )
                 }
             },
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog2 = false }
+                    onClick = { showDialog2 = false;
+                        if (isIconChanged2) {
+                            isIconChanged2 = !isIconChanged2
+                        }}
 
                 ) {
                     Text(text = "Zurück")
@@ -679,14 +662,17 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
                     Spacer(modifier = Modifier.height(16.dp))
                     // Text im Popup
                     Text(
-                        text = "Autoscheinwerfer vorne sind essentiell für die Sichtbarkeit und Sicherheit bei Nacht oder schlechten Wetterbedingungen. Es gibt zwei Haupttypen: Halogen- und LED-Scheinwerfer. Halogenlichter sind kostengünstiger, während LEDs energieeffizienter und langlebiger sind. Die richtige Ausrichtung ist wichtig, um eine gute Sicht zu gewährleisten, ohne andere Fahrer zu blenden. Unterschiedliche Funktionen wie Fernlicht, Abblendlicht und Nebelscheinwerfer optimieren die Ausleuchtung in verschiedenen Situationen."
+                        text = carScheinwerfer
                     )
                 }
             },
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog3 = false }
+                    onClick = { showDialog3 = false;
+                        if (isIconChanged3) {
+                            isIconChanged3 = !isIconChanged3
+                        }}
 
                 ) {
                     Text(text = "Zurück")
