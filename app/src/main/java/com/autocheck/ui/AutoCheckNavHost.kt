@@ -27,7 +27,7 @@ fun AutoCheckNavHost(
     ) {
     NavHost(
         navController = navController,
-        startDestination = "garage",
+        startDestination = "search",
         modifier = modifier,
     ) {
         composable( route = "login") {
@@ -56,7 +56,7 @@ fun AutoCheckNavHost(
                 bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
                 topBar = { TopNavigationBar(modifier = Modifier,
-                    navController) },
+                    navController,"Werkstätten") },
             ) { innerPadding ->
                 Werkstaetten(
                     modifier = Modifier.padding(innerPadding)

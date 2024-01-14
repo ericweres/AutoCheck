@@ -78,8 +78,8 @@ fun Garage(vehicles: List<Vehicle>, modifier: Modifier) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(text = "Zustand")
                 LinearProgressIndicator(
-                    progress = 0.6f,
-                    color = getConditionColor(0.6f)
+                    progress = 0.4f,
+                    color = getConditionColor(0.4f)
                 )
             }
         }
