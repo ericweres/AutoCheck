@@ -46,7 +46,7 @@ fun Werkstaetten(modifier: Modifier) {
             Spacer(modifier = Modifier.height(20.dp))
             Image(
                 painter = painterResource(id = R.drawable.werkstaetten),
-                contentDescription = "Homescreen Car",
+                contentDescription = "werkstätte beispiel",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .fillMaxWidth()

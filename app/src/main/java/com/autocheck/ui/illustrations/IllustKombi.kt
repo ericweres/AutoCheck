@@ -40,7 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun IllustKombi(modifier: Modifier, navController: NavHostController) {
-    var wechsler by remember { mutableStateOf(1) }
+    var wechsler by remember { mutableIntStateOf(1) }
     var isIconChanged by remember { mutableStateOf(true) }
     var isIconChanged2 by remember { mutableStateOf(true) }
     var isIconChanged3 by remember { mutableStateOf(true) }
@@ -101,7 +101,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
 
             when (wechsler) {
                 1 -> {
-                    Box() {
+                    Box {
                         Image(
                             painter = painterResource(id = R.drawable.kombi_front),
                             contentDescription = "Frontseite",
@@ -216,7 +216,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                     Box {
                         Image(
                             painter = painterResource(id = R.drawable.kombi_seite2),
-                            contentDescription = "Login Image",
+                            contentDescription = "Linke Seite",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
@@ -226,7 +226,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             Spacer(modifier = Modifier.height(260.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(115.dp))
-                                //Innenraum Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -235,7 +235,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Innenraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -244,7 +244,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             Spacer(modifier = Modifier.height(10.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(30.dp))
-                                //Motorraum Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -253,12 +253,12 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Motorraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(150.dp))
-                                //Außenspiegel Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -267,7 +267,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Außenspiegel",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -275,7 +275,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             Spacer(modifier = Modifier.height(5.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(40.dp))
-                                //Stoßstange vorne Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -284,12 +284,12 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(50.dp))
-                                //Stoßstange vorne Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -298,7 +298,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -312,7 +312,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Scheinwerfer vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -344,7 +344,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Innenraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -353,7 +353,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             Spacer(modifier = Modifier.height(40.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(40.dp))
-                                //Motorraum Button
+
                                 IconButton(
                                     onClick = { /*TODO*/ },
 
@@ -361,7 +361,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Motorraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -369,7 +369,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             Spacer(modifier = Modifier.height(20.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(70.dp))
-                                //Scheinwerfer vorne Button
+
                                 IconButton(
                                     onClick = { /*TODO*/ },
 
@@ -377,7 +377,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Scheinwerfer vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -393,7 +393,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                     Box {
                         Image(
                             painter = painterResource(id = R.drawable.kombi_seite),
-                            contentDescription = "Links",
+                            contentDescription = "Rechts",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
@@ -403,7 +403,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                             Spacer(modifier = Modifier.height(265.dp))
                             Row {
                                 Spacer(modifier = Modifier.width(160.dp))
-                                //Innenraum Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -412,7 +412,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Innenraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -430,12 +430,12 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Motorraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(150.dp))
-                                //Außenspiegel Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -444,7 +444,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Außenspiegel",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -460,12 +460,12 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(50.dp))
-                                //Stoßstange vorne Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -474,12 +474,12 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(70.dp))
-                                //Scheinwerfer vorne Button
+
                                 IconButton(
                                     modifier = Modifier.size(28.dp),
                                     onClick = { /*TODO*/ },
@@ -488,7 +488,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Scheinwerfer vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -585,7 +585,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog = false;
+                    onClick = { showDialog = false
                         if (isIconChanged) {
                         isIconChanged = !isIconChanged
                     } }
@@ -626,7 +626,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog2 = false;
+                    onClick = { showDialog2 = false
                         if (isIconChanged2) {
                             isIconChanged2 = !isIconChanged2
                         }}
@@ -667,7 +667,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog3 = false;
+                    onClick = { showDialog3 = false
                         if (isIconChanged3) {
                             isIconChanged3 = !isIconChanged3
                         }}

@@ -3,14 +3,12 @@ package com.autocheck.ui.illustrations
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
@@ -42,7 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun IllustBike(modifier: Modifier, navController: NavHostController) {
-    var wechsler by remember { mutableStateOf(1) }
+    var wechsler by remember { mutableIntStateOf(1) }
     var isIconChanged by remember { mutableStateOf(true) }
     var isIconChanged2 by remember { mutableStateOf(true) }
     var showDialog by remember { mutableStateOf(false) }
@@ -99,7 +97,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
 
             when (wechsler) {
                 1 -> {
-                    Box() {
+                    Box {
                         Image(
                             painter = painterResource(id = R.drawable.motorrad_front),
                             contentDescription = "Frontseite",
@@ -120,7 +118,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -128,7 +126,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 //Außenspiegel Button
                                 IconButton(
                                     onClick = {
-                                        showDialog = true;
+                                        showDialog = true
                                         if (isIconChanged) {
                                             isIconChanged = !isIconChanged
                                         }
@@ -159,7 +157,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -201,7 +199,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -216,7 +214,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                     Box {
                         Image(
                             painter = painterResource(id = R.drawable.motorrad_hinten),
-                            contentDescription = "Motor hinten",
+                            contentDescription = "Motorrad hinten",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .width(300.dp)
@@ -235,7 +233,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Innenraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -253,7 +251,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Motorraum",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -267,7 +265,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Außenspiegel",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -284,7 +282,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -298,7 +296,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Stoßstange vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }
@@ -312,7 +310,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                                 {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_search),
-                                        contentDescription = "Scheinwerfer vorne",
+                                        contentDescription = null,
                                         tint = Color.Red,
                                     )
                                 }

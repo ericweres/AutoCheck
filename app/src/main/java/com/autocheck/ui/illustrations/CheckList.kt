@@ -1,44 +1,30 @@
 package com.autocheck.ui.illustrations
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import com.autocheck.ui.theme.AutoCheckTheme
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material.icons.*
-import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.autocheck.data.Checklist
 import com.autocheck.viewmodel.ChecklistViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 @Composable
@@ -66,8 +52,7 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
 
     LazyColumn(modifier = modifier) {
         items(carParts) { teil ->
-            val selectedOption = selectedOptions.value[teil] ?: 0
-            val backgroundColor = when (selectedOption) {
+            val backgroundColor = when (selectedOptions.value[teil] ?: 0) {
                 1 -> Color.Green.copy(alpha = 0.2f)
                 2 -> Color(0xFFFFA500).copy(alpha = 0.2f)
                 3 -> Color.Red.copy(alpha = 0.2f)
