@@ -24,11 +24,12 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.autocheck.data.Checklist
+import com.autocheck.data.Vehicle
 import com.autocheck.viewmodel.ChecklistViewModel
 
 
 @Composable
-fun CheckList(modifier: Modifier, navController: NavHostController) {
+fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: Int?) {
     val radioOptions = listOf("Gut", "Mittel", "Schlecht")
     val carParts = listOf(
         "Scheinwerfer",
@@ -50,6 +51,25 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
     val selectedOptions = remember { mutableStateOf(mapOf<String, Int>()) }
     val viewModel: ChecklistViewModel = hiltViewModel()
 
+
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = vehicle.name,
+                style = MaterialTheme.typography.headlineLarge
+            )
+            Button(onClick = {
+
+            }) {
+                Text("Parken")
+            }
+        }
     LazyColumn(modifier = modifier) {
         items(carParts) { teil ->
             val backgroundColor = when (selectedOptions.value[teil] ?: 0) {
@@ -64,7 +84,7 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
                     .fillMaxWidth()
                     .background(color = backgroundColor)
                     .padding(horizontal = 16.dp, vertical = 8.dp),
-                    //.border(1.dp, Color.Gray, shape = RoundedCornerShape(0.dp)),
+                //.border(1.dp, Color.Gray, shape = RoundedCornerShape(0.dp)),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -129,7 +149,9 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
                             append(zustand)
                         }
                     }
-                )            }
+                )
+            }
+        }
         }
     }
 }

@@ -11,14 +11,14 @@ interface VehicleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertVehicle(vehicle: Vehicle)
     @Query("SELECT * FROM Vehicle")
-    fun getAllVehicles(): Flow<List<Vehicle>>
+    suspend fun getAllVehicles(): List<Vehicle>
 
     @Query("SELECT * FROM Vehicle WHERE id IN (:ids)")
     suspend fun getVehiclesByIds(ids: List<Int>): List<Vehicle>
 
-    @Query("SELECT * FROM Vehicle WHERE name = :name")
-    fun getCarByName(name: String): Flow<List<Vehicle>>
+    @Query("SELECT * FROM Vehicle WHERE name LIKE '%' || :name || '%'")
+    suspend fun getVehiclesByName(name: String): List<Vehicle>
 
     @Query("SELECT * FROM Vehicle WHERE id = :id")
-    fun getCarById(id: Int): Flow<Vehicle>
+    suspend fun getVehicleById(id: Int): Vehicle?
 }

@@ -24,16 +24,6 @@ class GarageViewModel @Inject constructor(
     val vehicles: StateFlow<List<Vehicle>> = _vehicles.asStateFlow()
 
     init {
-        addSampleVehicles()
-        addVehicleToGarage(1,1)
-        addVehicleToGarage(1,2)
-        addVehicleToGarage(1,3)
-        addVehicleToGarage(1,4)
-        addVehicleToGarage(1,5)
-        addVehicleToGarage(1,6)
-        addVehicleToGarage(1,7)
-
-
         loadVehicles()
     }
 
@@ -44,9 +34,9 @@ class GarageViewModel @Inject constructor(
             _vehicles.value = vehicleRepository.getVehiclesByIds(carIds)
         }
     }
-    
+
     fun addVehicleToGarage(userId: Int, carId: Int) {
-        val garageEntry = Garage(userId = userId, carId = carId)
+        val garageEntry = Garage(userId = userId, carId = carId, checklistId = 1)
         viewModelScope.launch {
             garageRepository.insertGarage(garageEntry)
         }
@@ -55,13 +45,13 @@ class GarageViewModel @Inject constructor(
     private fun addSampleVehicles() {
         viewModelScope.launch {
             val vehicles = listOf(
-                Vehicle(name = "Tesla Model S", type = "car", checklist = null),
-                Vehicle(name = "Yamaha YZF", type = "bike", checklist = null),
-                Vehicle(name = "Ford Mustang", type = "car", checklist = null),
-                Vehicle(name = "Harley Davidson", type = "bike", checklist = null),
-                Vehicle(name = "Chevrolet Corvette", type = "car", checklist = null),
-                Vehicle(name = "Ducati Panigale", type = "bike", checklist = null),
-                Vehicle(name = "Porsche 911", type = "car", checklist = null)
+                Vehicle(name = "Tesla Model S", type = "car"),
+                Vehicle(name = "Yamaha YZF", type = "bike"),
+                Vehicle(name = "Ford Mustang", type = "car"),
+                Vehicle(name = "Harley Davidson", type = "bike"),
+                Vehicle(name = "Chevrolet Corvette", type = "car"),
+                Vehicle(name = "Ducati Panigale", type = "bike"),
+                Vehicle(name = "Porsche 911", type = "car")
             )
 
             vehicles.forEach { vehicle ->

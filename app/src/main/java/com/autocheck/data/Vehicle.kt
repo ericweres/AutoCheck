@@ -9,5 +9,4 @@ data class Vehicle(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "type") val type: String,
-    @ColumnInfo(name = "checklistId") val checklist: Int?,
     )
