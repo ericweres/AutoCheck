@@ -39,6 +39,8 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.autocheck.viewmodel.VehicleViewModel
 
 @Composable
 fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: Int?) {
@@ -47,7 +49,14 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
     var isIconChanged2 by remember { mutableStateOf(true) }
     var showDialog by remember { mutableStateOf(false) }
     var showDialog2 by remember { mutableStateOf(false) }
-    Column(
+
+    val vehicleViewModel: VehicleViewModel = hiltViewModel()
+    val selectedVehicle by vehicleViewModel.selectedVehicle.collectAsState()
+
+    if (vehicleId != null) {
+        vehicleViewModel.fetchVehicleById(vehicleId)
+
+        Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -459,6 +468,8 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
             },
         )
     }
-
+    } else {
+        Text(text ="Ein Fehler ist aufgetreten")
+    }
 
 }

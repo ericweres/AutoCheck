@@ -548,7 +548,7 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
 
             )
         Button(
-            onClick = { navController.navigate("checkList") },
+            onClick = { navController.navigate("checkList/$vehicleId") },
             modifier = Modifier
                 .width(302.dp)
                 .height(62.dp)
@@ -689,7 +689,9 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
     }
 
 
-}
+} else {
+    Text(text ="Ein Fehler ist aufgetreten")
+    }
 
 }
 

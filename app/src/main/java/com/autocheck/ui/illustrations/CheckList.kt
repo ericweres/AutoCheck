@@ -25,15 +25,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.*
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.autocheck.data.Checklist
+import com.autocheck.data.Vehicle
+import com.autocheck.data.VehicleDao
+import com.autocheck.data.VehicleRepository
 import com.autocheck.viewmodel.ChecklistViewModel
 import com.autocheck.viewmodel.VehicleViewModel
 
 
 @Composable
-fun CheckList(modifier: Modifier, navController: NavHostController) {
+fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: Int?) {
     val radioOptions = listOf("Gut", "Mittel", "Schlecht")
     val carParts = listOf(
         "Scheinwerfer",
@@ -58,31 +63,31 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
 
     val selectedVehicle by vehicleViewModel.selectedVehicle.collectAsState()
 
-    Column (
-        modifier = Modifier
-            .fillMaxWidth()
+
+    if (vehicleId != null) {
+        vehicleViewModel.fetchVehicleById(vehicleId)
+
+
+        Column ( modifier = modifier
     ){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = selectedVehicle.name,
                 style = MaterialTheme.typography.headlineLarge
             )
-            Text(
-                "test"
-            )
             Button(onClick = {
 
             }) {
-                Text("Parken")
+                Text("Parken",color = MaterialTheme.colorScheme.onPrimary)
             }
         }
-    LazyColumn(modifier = modifier) {
+        LazyColumn() {
         items(carParts) { teil ->
             val selectedOption = selectedOptions.value[teil] ?: 0
             val backgroundColor = when (selectedOption) {
@@ -166,6 +171,7 @@ fun CheckList(modifier: Modifier, navController: NavHostController) {
             }
         }
         }
+    }} else {
+        Text(text ="Ein Fehler ist aufgetreten")
     }
 }
-
