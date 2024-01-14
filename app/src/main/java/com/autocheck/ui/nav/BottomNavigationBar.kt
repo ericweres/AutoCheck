@@ -1,6 +1,5 @@
 package com.autocheck.ui.nav
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
@@ -46,7 +45,7 @@ fun BottomNavigationBar(modifier: Modifier = Modifier, navController: NavHostCon
                 Text("Werkstätte")
             },
             selected = false,
-            onClick = {}
+            onClick = {navController.navigate("werkstaetten")}
         )
         NavigationBarItem(
             icon = {

@@ -52,7 +52,9 @@ fun TopNavigationBar(modifier: Modifier = Modifier, navController: NavHostContro
             Icon(
                 painter = painterResource(id = R.drawable.ic_home),
                 contentDescription = "Home",
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .clickable { navController.navigate("home") }
             )
             Spacer(Modifier.width(16.dp))
         },
