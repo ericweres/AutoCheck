@@ -34,7 +34,6 @@ import java.util.Locale
 
 @Composable
 fun GarageScreen(modifier: Modifier) {
-    // Obtain ViewModel instance and collect cars as state
     val garageViewModel: GarageViewModel = hiltViewModel()
     val vehicles by garageViewModel.vehicles.collectAsState()
 
@@ -48,7 +47,6 @@ fun Garage(vehicles: List<Vehicle>, modifier: Modifier) {
 
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(bottom = 56.dp)
     ) {
             items(vehicles) { vehicle ->
                 GarageItem(vehicle)

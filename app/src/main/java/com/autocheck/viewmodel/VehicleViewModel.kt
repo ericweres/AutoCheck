@@ -15,12 +15,19 @@ import javax.inject.Inject
 class VehicleViewModel @Inject constructor(
     private val vehicleRepository: VehicleRepository
 ) : ViewModel() {
-    private val _selectedVehicle = MutableStateFlow<Vehicle?>(null)
-    val selectedVehicle: StateFlow<Vehicle?> = _selectedVehicle.asStateFlow()
+    private val _selectedVehicle = MutableStateFlow<Vehicle>(
+        Vehicle(-1,"Fehler", "car")
+    )
+    val selectedVehicle: StateFlow<Vehicle> = _selectedVehicle.asStateFlow()
 
     fun fetchVehicleById(vehicleId: Int) {
         viewModelScope.launch {
-            _selectedVehicle.value = vehicleRepository.getVehicleById(vehicleId)
+            val vehicle = vehicleRepository.getVehicleById(vehicleId)
+
+            if (vehicle != null)
+            {
+                _selectedVehicle.value = vehicle
+            }
         }
     }
 }
