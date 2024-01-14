@@ -406,7 +406,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                     Spacer(modifier = Modifier.height(16.dp))
                     // Text im Popup
                     Text(
-                        text = "Text cockpit"
+                        text = bikeCockpit
                     )
                 }
             },
@@ -444,7 +444,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController) {
                     Spacer(modifier = Modifier.height(16.dp))
                     // Text im Popup
                     Text(
-                        text = "Reifen Text"
+                        text = bikeReifen
                     )
                 }
             },

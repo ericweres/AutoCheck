@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,31 +23,37 @@ import com.autocheck.ui.theme.AutoCheckTheme
 
 
 @Composable
-fun Werkstaetten (modifier: Modifier)
-{
-
-    Column(
+fun Werkstaetten(modifier: Modifier) {
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
-        Text(
-            text = "Werkstätten",
-            fontSize = 35.sp,
-            fontWeight = FontWeight.Bold
-        )
+        item {
+            Spacer(modifier = Modifier.height(60.dp))
+            Image(
+                painter = painterResource(id = R.drawable.map),
+                contentDescription = "map",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+            )
+        }
 
-        Spacer(modifier = Modifier.height(60.dp))
-        Image(
-            painter = painterResource(id = R.drawable.werkstaetten),
-            contentDescription = "Homescreen Car",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(550.dp)
-        )
+        item {
+            Spacer(modifier = Modifier.height(20.dp))
+            Image(
+                painter = painterResource(id = R.drawable.werkstaetten),
+                contentDescription = "Homescreen Car",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(550.dp)
+            )
+            Spacer(modifier = Modifier.height(50.dp))
+        }
     }
 }
 
