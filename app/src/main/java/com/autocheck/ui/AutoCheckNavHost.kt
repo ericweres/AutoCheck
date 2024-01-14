@@ -100,7 +100,9 @@ fun AutoCheckNavHost(
             }
         }
 
-        composable( route = "checkList") {
+        composable( route = "checkList/{vehicleId}") {
+                backStackEntry ->
+            val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toIntOrNull()
             Scaffold(
                 bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
@@ -110,6 +112,7 @@ fun AutoCheckNavHost(
                 CheckList(
                     modifier = Modifier.padding(innerPadding),
                     navController,
+                    vehicleId = vehicleId
                 )
             }
         }

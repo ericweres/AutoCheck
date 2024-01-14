@@ -20,7 +20,7 @@ class VehicleRepository @Inject constructor(private val vehicleDao: VehicleDao) 
         return vehicleDao.getVehiclesByIds(ids)
     }
 
-    suspend fun getVehicleById(id: Int): Vehicle? {
+    open suspend fun getVehicleById(id: Int): Vehicle? {
         return vehicleDao.getVehicleById(id)
     }
 }
