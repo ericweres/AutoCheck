@@ -462,11 +462,3 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
 
 
 }
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun IllustBikePreview() {
-    AutoCheckTheme {
-        IllustBike(modifier = Modifier, navController = rememberNavController())
-    }
-}

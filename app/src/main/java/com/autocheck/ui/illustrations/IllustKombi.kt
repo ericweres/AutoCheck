@@ -37,6 +37,8 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.autocheck.viewmodel.VehicleViewModel
 
 @Composable
 fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId: Int?) {
@@ -48,16 +50,21 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
     var showDialog2 by remember { mutableStateOf(false) }
     var showDialog3 by remember { mutableStateOf(false) }
 
-    var vehicle = getVe
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+    val vehicleViewModel: VehicleViewModel = hiltViewModel()
+    val selectedVehicle by vehicleViewModel.selectedVehicle.collectAsState()
+
+    if (vehicleId != null) {
+        vehicleViewModel.fetchVehicleById(vehicleId)
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(100.dp))
         Text(
-            text = "Auto Modell",
+            text = selectedVehicle.name,
             fontSize = 30.sp
         )
         Text(
@@ -684,12 +691,6 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
 
 }
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun IllustKombiPreview() {
-    AutoCheckTheme {
-        IllustKombi(modifier = Modifier, navController = rememberNavController())
-    }
 }
 
 
