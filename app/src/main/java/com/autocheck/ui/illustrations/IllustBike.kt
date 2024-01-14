@@ -41,7 +41,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 
 @Composable
-fun IllustBike(modifier: Modifier, navController: NavHostController) {
+fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: Int?) {
     var wechsler by remember { mutableStateOf(1) }
     var isIconChanged by remember { mutableStateOf(true) }
     var isIconChanged2 by remember { mutableStateOf(true) }

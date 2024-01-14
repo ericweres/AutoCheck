@@ -1,6 +1,7 @@
 package com.autocheck.ui
 
 import HomeScreen
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import com.autocheck.ui.auth.GetStarted
 import com.autocheck.ui.auth.LoginScreen
 import com.autocheck.ui.auth.RegisterScreen
 import com.autocheck.ui.home.GarageScreen
+import com.autocheck.ui.home.SearchScreen
 import com.autocheck.ui.home.Werkstaetten
 import com.autocheck.ui.illustrations.CheckList
 import com.autocheck.ui.illustrations.IllustBike
@@ -30,16 +32,16 @@ fun AutoCheckNavHost(
         startDestination = "search",
         modifier = modifier,
     ) {
-        composable( route = "login") {
+        composable( "login") {
             LoginScreen(navController)
         }
-        composable( route = "getStarted") {
+        composable( "getStarted") {
             GetStarted(navController)
         }
-        composable( route = "register") {
+        composable( "register") {
             RegisterScreen(navController)
         }
-       composable( route = "home") {
+       composable("home") {
            Scaffold(
                bottomBar = { BottomNavigationBar(modifier = Modifier,
                    navController) },
@@ -51,7 +53,7 @@ fun AutoCheckNavHost(
                )
            }
        }
-        composable( route = "werkstaetten") {
+        composable("werkstaetten") {
             Scaffold(
                 bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
@@ -64,7 +66,9 @@ fun AutoCheckNavHost(
             }
         }
 
-        composable( route = "kombi") {
+        composable( "kombi/{vehicleId}") {
+                backStackEntry ->
+            val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toIntOrNull()
             Scaffold(
                 bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
@@ -73,12 +77,15 @@ fun AutoCheckNavHost(
             ) { innerPadding ->
                 IllustKombi(
                     modifier = Modifier.padding(innerPadding),
-                    navController
+                    navController,
+                    vehicleId = vehicleId
                 )
             }
         }
 
-        composable( route = "bike") {
+        composable("bike/{vehicleId}") {
+                backStackEntry ->
+            val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toIntOrNull()
             Scaffold(
                 bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
@@ -87,12 +94,15 @@ fun AutoCheckNavHost(
             ) { innerPadding ->
                 IllustBike(
                     modifier = Modifier.padding(innerPadding),
-                    navController
+                    navController,
+                    vehicleId = vehicleId
                 )
             }
         }
 
-        composable( route = "checkList") {
+        composable( route = "checkList/{vehicleId}") {
+                backStackEntry ->
+            val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toIntOrNull()
             Scaffold(
                 bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
@@ -101,7 +111,8 @@ fun AutoCheckNavHost(
             ) { innerPadding ->
                 CheckList(
                     modifier = Modifier.padding(innerPadding),
-                    navController
+                    navController,
+                    vehicleId = vehicleId
                 )
             }
         }
@@ -114,7 +125,7 @@ fun AutoCheckNavHost(
                 topBar = { TopNavigationBar(modifier = Modifier,
                     navController,"Suche") },
             ) { innerPadding ->
-                Search(modifier = Modifier.padding(innerPadding), navController)
+                SearchScreen(modifier = Modifier.padding(innerPadding), navController)
             }
         }
 

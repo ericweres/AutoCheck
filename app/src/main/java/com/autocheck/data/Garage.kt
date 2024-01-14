@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class Garage(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "userId") val userId: Int,
-    @ColumnInfo(name = "carId") val carId: Int
-)
+    @ColumnInfo(name = "carId") val carId: Int,
+    @ColumnInfo(name = "checklistId") val checklistId: Int,
+    )

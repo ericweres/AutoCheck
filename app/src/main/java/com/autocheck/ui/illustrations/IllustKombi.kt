@@ -39,7 +39,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 
 @Composable
-fun IllustKombi(modifier: Modifier, navController: NavHostController) {
+fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId: Int?) {
     var wechsler by remember { mutableStateOf(1) }
     var isIconChanged by remember { mutableStateOf(true) }
     var isIconChanged2 by remember { mutableStateOf(true) }
@@ -47,6 +47,8 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController) {
     var showDialog by remember { mutableStateOf(false) }
     var showDialog2 by remember { mutableStateOf(false) }
     var showDialog3 by remember { mutableStateOf(false) }
+
+    var vehicle = getVe
     Column(
         modifier = Modifier
             .fillMaxSize()
