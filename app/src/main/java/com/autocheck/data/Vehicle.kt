@@ -5,9 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Car(
+data class Vehicle(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "type") val type: String,
-    @ColumnInfo(name = "checklistId") val email: String,
+    @ColumnInfo(name = "checklistId") val checklist: Int?,
     )

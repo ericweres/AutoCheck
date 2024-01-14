@@ -13,6 +13,7 @@ import com.autocheck.ui.nav.TopNavigationBar
 import com.autocheck.ui.auth.GetStarted
 import com.autocheck.ui.auth.LoginScreen
 import com.autocheck.ui.auth.RegisterScreen
+import com.autocheck.ui.home.GarageScreen
 import com.autocheck.ui.illustrations.CheckList
 import com.autocheck.ui.illustrations.IllustBike
 import com.autocheck.ui.illustrations.IllustKombi
@@ -25,7 +26,7 @@ fun AutoCheckNavHost(
     ) {
     NavHost(
         navController = navController,
-        startDestination = "getStarted",
+        startDestination = "garage",
         modifier = modifier,
     ) {
         composable( route = "login") {
@@ -39,9 +40,10 @@ fun AutoCheckNavHost(
         }
        composable( route = "home") {
            Scaffold(
-               bottomBar = { BottomNavigationBar() },
-               topBar = { TopNavigationBar(modifier = Modifier,
+               bottomBar = { BottomNavigationBar(modifier = Modifier,
                    navController) },
+               topBar = { TopNavigationBar(modifier = Modifier,
+                   navController,"Startseite") },
            ) { innerPadding ->
                 HomeScreen(
                    modifier = Modifier.padding(innerPadding)
@@ -50,9 +52,10 @@ fun AutoCheckNavHost(
        }
         composable( route = "kombi") {
             Scaffold(
-                bottomBar = { BottomNavigationBar() },
-                topBar = { TopNavigationBar(modifier = Modifier,
+                bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController,"Kombi") },
             ) { innerPadding ->
                 IllustKombi(
                     modifier = Modifier.padding(innerPadding),
@@ -63,9 +66,10 @@ fun AutoCheckNavHost(
 
         composable( route = "bike") {
             Scaffold(
-                bottomBar = { BottomNavigationBar() },
-                topBar = { TopNavigationBar(modifier = Modifier,
+                bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController,"Motorrad") },
             ) { innerPadding ->
                 IllustBike(
                     modifier = Modifier.padding(innerPadding),
@@ -76,9 +80,10 @@ fun AutoCheckNavHost(
 
         composable( route = "checkList") {
             Scaffold(
-                bottomBar = { BottomNavigationBar() },
-                topBar = { TopNavigationBar(modifier = Modifier,
+                bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController,"Checkliste") },
             ) { innerPadding ->
                 CheckList(
                     modifier = Modifier.padding(innerPadding),
@@ -90,13 +95,27 @@ fun AutoCheckNavHost(
 
         composable( route = "search") {
             Scaffold(
-                bottomBar = { BottomNavigationBar() },
-                topBar = { TopNavigationBar(modifier = Modifier,
+                bottomBar = { BottomNavigationBar(modifier = Modifier,
                     navController) },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController,"Suche") },
             ) { innerPadding ->
                 Search(modifier = Modifier.padding(innerPadding), navController)
             }
         }
 
+
+        composable( route = "garage") {
+            Scaffold(
+                bottomBar = { BottomNavigationBar(modifier = Modifier,
+                    navController) },
+                topBar = { TopNavigationBar(modifier = Modifier,
+                    navController,"Meine Garage") },
+            ) { innerPadding ->
+                GarageScreen(
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+        }
     }
 }
