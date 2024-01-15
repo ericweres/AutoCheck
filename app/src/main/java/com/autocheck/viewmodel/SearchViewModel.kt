@@ -1,5 +1,6 @@
 package com.autocheck.viewmodel
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.autocheck.data.Vehicle
@@ -22,10 +23,14 @@ class SearchViewModel @Inject constructor(
     private val _filteredVehicles = MutableStateFlow<List<Vehicle>>(emptyList())
     val filteredVehicles: StateFlow<List<Vehicle>> = _filteredVehicles.asStateFlow()
 
-    fun updateSearchQuery(query: String) {
+    fun updateSearchQuery(query: String, type: List<String> ) {
         _searchQuery.value = query
         viewModelScope.launch {
-            _filteredVehicles.value = repository.getVehiclesByName(query)
+            _filteredVehicles.value = repository.getVehiclesByNameAndType(query,type)
         }
+    }
+
+    init {
+        updateSearchQuery("",mutableStateListOf("car","bike"))
     }
 }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,26 +21,27 @@ import com.autocheck.ui.home.Werkstaetten
 import com.autocheck.ui.illustrations.CheckList
 import com.autocheck.ui.illustrations.IllustBike
 import com.autocheck.ui.illustrations.IllustKombi
-import com.autocheck.ui.nav.Search
+import com.autocheck.viewmodel.UserViewModel
 
 @Composable
 fun AutoCheckNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     ) {
+    val viewModel: UserViewModel = hiltViewModel()
     NavHost(
         navController = navController,
         startDestination = "search",
         modifier = modifier,
     ) {
         composable( "login") {
-            LoginScreen(navController)
+            LoginScreen(navController,viewModel)
         }
         composable( "getStarted") {
             GetStarted(navController)
         }
         composable( "register") {
-            RegisterScreen(navController)
+            RegisterScreen(navController,viewModel)
         }
        composable("home") {
            Scaffold(
@@ -49,7 +51,8 @@ fun AutoCheckNavHost(
                    navController,"Startseite") },
            ) { innerPadding ->
                 HomeScreen(
-                   modifier = Modifier.padding(innerPadding)
+                   modifier = Modifier.padding(innerPadding),
+                    viewModel
                )
            }
        }
@@ -112,7 +115,8 @@ fun AutoCheckNavHost(
                 CheckList(
                     modifier = Modifier.padding(innerPadding),
                     navController,
-                    vehicleId = vehicleId
+                    vehicleId = vehicleId,
+                    viewModel
                 )
             }
         }
@@ -138,7 +142,8 @@ fun AutoCheckNavHost(
                     navController,"Meine Garage") },
             ) { innerPadding ->
                 GarageScreen(
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
+                    viewModel
                 )
             }
         }

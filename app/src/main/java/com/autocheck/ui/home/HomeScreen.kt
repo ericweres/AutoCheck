@@ -27,13 +27,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.autocheck.R
 import com.autocheck.ui.AutoCheckApp
 import com.autocheck.ui.theme.AutoCheckTheme
+import com.autocheck.viewmodel.UserViewModel
 
 @Composable
-fun HomeScreen (modifier: Modifier){
+fun HomeScreen (modifier: Modifier,userViewModel: UserViewModel
+){
     var checked by remember { mutableStateOf(false) }
+    val username by userViewModel.username.collectAsState("Nicht Angemeldet")
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +47,7 @@ fun HomeScreen (modifier: Modifier){
 
         Spacer(modifier = Modifier.height(60.dp))
         Text(
-            text = "Hallo Martin, \n" +
+            text = "Hallo $username, \n" +
                     "was würdest du gerne \n" +
                     "als nächstes tun?",
             fontSize = 25.sp,
@@ -103,12 +107,4 @@ fun HomeScreen (modifier: Modifier){
     }
 
 
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun AppPreview() {
-    AutoCheckTheme {
-        HomeScreen(modifier = Modifier)
-    }
 }

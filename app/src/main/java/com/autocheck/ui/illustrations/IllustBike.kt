@@ -64,13 +64,8 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
     ) {
         Spacer(modifier = Modifier.height(100.dp))
         Text(
-            text = "Auto Modell",
+            text = selectedVehicle.name,
             fontSize = 30.sp
-        )
-        Text(
-            text = "Auto Modell",
-            fontSize = 12.sp,
-            color = Color.Gray
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -376,7 +371,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
 
             )
         Button(
-            onClick = { navController.navigate("checkList") },
+            onClick = { navController.navigate("checkList/$vehicleId") },
             modifier = Modifier
                 .width(302.dp)
                 .height(62.dp)

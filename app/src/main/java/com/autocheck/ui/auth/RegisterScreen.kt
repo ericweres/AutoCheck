@@ -39,7 +39,7 @@ import com.autocheck.data.UserRepository
 import com.autocheck.viewmodel.UserViewModel
 
 @Composable
-fun RegisterScreen(navController: NavHostController) {
+fun RegisterScreen(navController: NavHostController, viewModel: UserViewModel) {
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -60,7 +60,6 @@ fun RegisterScreen(navController: NavHostController) {
         }
     }
 
-    val viewModel: UserViewModel = hiltViewModel()
 
     fun validateUsername(): Boolean {
         return if (username.isBlank()) {

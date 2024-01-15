@@ -67,11 +67,6 @@ fun IllustKombi(modifier: Modifier, navController: NavHostController, vehicleId:
             text = selectedVehicle.name,
             fontSize = 30.sp
         )
-        Text(
-            text = "Auto Modell",
-            fontSize = 12.sp,
-            color = Color.Gray
-        )
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly

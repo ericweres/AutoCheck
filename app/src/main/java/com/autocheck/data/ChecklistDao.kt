@@ -13,7 +13,10 @@ interface ChecklistDao {
     suspend fun insert(checklist: Checklist): Long
 
     @Query("SELECT * FROM Checklist WHERE id = :id")
-    suspend fun getByCarId(id: Int): Checklist
+    suspend fun getById(id: Int): Checklist
+
+    @Query("SELECT * FROM Checklist WHERE id IN (:ids)")
+    suspend fun getByIds(ids: List<Int>): List<Checklist>
 
     @Update
     suspend fun update(checklist: Checklist)

@@ -8,19 +8,19 @@ class VehicleRepository @Inject constructor(private val vehicleDao: VehicleDao) 
         vehicleDao.insertVehicle(vehicle)
     }
 
-    suspend fun getAllVehicles(): List<Vehicle> {
-        return vehicleDao.getAllVehicles()
-    }
-
     suspend fun getVehiclesByName(name: String): List<Vehicle> {
         return vehicleDao.getVehiclesByName(name)
+    }
+
+    suspend fun getVehiclesByNameAndType(name: String, type: List<String>): List<Vehicle> {
+        return vehicleDao.getVehiclesByNameAndType(name, type)
     }
 
     suspend fun getVehiclesByIds(ids: List<Int>): List<Vehicle> {
         return vehicleDao.getVehiclesByIds(ids)
     }
 
-    open suspend fun getVehicleById(id: Int): Vehicle? {
+    suspend fun getVehicleById(id: Int): Vehicle? {
         return vehicleDao.getVehicleById(id)
     }
 }

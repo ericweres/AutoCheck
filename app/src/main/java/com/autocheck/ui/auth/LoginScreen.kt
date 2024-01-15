@@ -1,6 +1,7 @@
 package com.autocheck.ui.auth
 
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -35,7 +36,7 @@ import androidx.navigation.compose.rememberNavController
 import com.autocheck.viewmodel.UserViewModel
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController,viewModel: UserViewModel ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -48,7 +49,6 @@ fun LoginScreen(navController: NavHostController) {
 
     var errorMessage by remember { mutableStateOf("") }
 
-    val viewModel: UserViewModel = hiltViewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -137,13 +137,5 @@ fun LoginScreen(navController: NavHostController) {
                 color = Color.Blue
             )
         }
-    }
-}
-
-@Preview( showBackground = true, showSystemUi = true,)
-@Composable
-fun LoginScreenPreview() {
-    AutoCheckTheme{
-        LoginScreen(navController = rememberNavController())
     }
 }

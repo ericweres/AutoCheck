@@ -19,6 +19,10 @@ interface VehicleDao {
     @Query("SELECT * FROM Vehicle WHERE name LIKE '%' || :name || '%'")
     suspend fun getVehiclesByName(name: String): List<Vehicle>
 
+    @Query("SELECT * FROM Vehicle WHERE name LIKE '%' || :name || '%' AND type in (:type)")
+    suspend fun getVehiclesByNameAndType(name: String, type: List<String>): List<Vehicle>
+
+
     @Query("SELECT * FROM Vehicle WHERE id = :id")
     suspend fun getVehicleById(id: Int): Vehicle?
 }

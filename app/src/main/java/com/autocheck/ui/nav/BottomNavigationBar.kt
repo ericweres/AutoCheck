@@ -89,7 +89,8 @@ fun BottomNavigationBar(modifier: Modifier = Modifier, navController: NavHostCon
                 )
             },
             selected = false,
-            onClick = {}
+            onClick = {                navController.navigate("login")
+            }
         )
 
         NavigationBarItem(

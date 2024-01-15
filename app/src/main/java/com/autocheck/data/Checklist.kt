@@ -12,6 +12,7 @@ data class Checklist(
     @ColumnInfo(name = "bumper") val bumper: Int?,
     @ColumnInfo(name = "sensor") val sensor: Int?,
     @ColumnInfo(name = "exterior") val exterior: Int?,
+    @ColumnInfo(name = "tires") val tires: Int?,
     @ColumnInfo(name = "rims") val rims: Int?,
     @ColumnInfo(name = "brakes") val brakes: Int?,
     @ColumnInfo(name = "suspension") val suspension: Int?,

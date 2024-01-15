@@ -1,5 +1,6 @@
 package com.autocheck.ui.illustrations
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -24,21 +25,18 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
-import androidx.compose.material.icons.*
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.autocheck.data.Checklist
-import com.autocheck.data.Vehicle
-import com.autocheck.data.VehicleDao
-import com.autocheck.data.VehicleRepository
 import com.autocheck.viewmodel.ChecklistViewModel
+import com.autocheck.viewmodel.GarageViewModel
+import com.autocheck.viewmodel.UserViewModel
 import com.autocheck.viewmodel.VehicleViewModel
 
 
 @Composable
-fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: Int?) {
+fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: Int?,userViewModel: UserViewModel
+) {
     val radioOptions = listOf("Gut", "Mittel", "Schlecht")
     val carParts = listOf(
         "Scheinwerfer",
@@ -55,13 +53,18 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
         "Spiegel",
         "Sitze",
         "Infotainment",
+        "Innenraum",
         "Auspuff"
     )
-    val selectedOptions = remember { mutableStateOf(mapOf<String, Int>()) }
+    val garageViewModel: GarageViewModel = hiltViewModel()
     val checklistViewModel: ChecklistViewModel = hiltViewModel()
     val vehicleViewModel: VehicleViewModel = hiltViewModel()
+    val userId by userViewModel.userId.collectAsState()
 
     val selectedVehicle by vehicleViewModel.selectedVehicle.collectAsState()
+    val savedChecklistId by checklistViewModel.savedChecklistId.collectAsState()
+
+    val selectedOptions = remember { mutableStateOf(mapOf<String, Int>()) }
 
 
     if (vehicleId != null) {
@@ -82,11 +85,37 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
                 style = MaterialTheme.typography.headlineLarge
             )
             Button(onClick = {
-
-            }) {
+                val checklist = Checklist(
+                    light = selectedOptions.value["Scheinwerfer"],
+                    engine = selectedOptions.value["Motor"],
+                    bumper = selectedOptions.value["Stoßstange"],
+                    sensor = selectedOptions.value["Sensoren"],
+                    exterior = selectedOptions.value["Karosserie"],
+                    tires = selectedOptions.value["Reifen"],
+                    rims = selectedOptions.value["Felgen"],
+                    brakes = selectedOptions.value["Bremsen"],
+                    suspension = selectedOptions.value["Suspension"],
+                    wheel = selectedOptions.value["Radlauf"],
+                    sill = selectedOptions.value["Fensterbrett"],
+                    mirror = selectedOptions.value["Spiegel"],
+                    seat = selectedOptions.value["Sitze"],
+                    infotainment = selectedOptions.value["Infotainment"],
+                    interior = selectedOptions.value["Innenraum"],
+                    exhaust = selectedOptions.value["Auspuff"],
+                )
+                checklistViewModel.saveChecklist(checklist)
+                             },
+                enabled = selectedOptions.value.size == carParts.size
+            ) {
                 Text("Parken",color = MaterialTheme.colorScheme.onPrimary)
             }
         }
+            LaunchedEffect(savedChecklistId) {
+                if (savedChecklistId != -1) {
+                    garageViewModel.addVehicleToGarage(userId, vehicleId, savedChecklistId)
+                    navController.navigate("garage")
+                }
+            }
         LazyColumn() {
         items(carParts) { teil ->
             val selectedOption = selectedOptions.value[teil] ?: 0
@@ -113,24 +142,8 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
                         onClick = {
                             selectedOptions.value += (teil to index + 1)
 
-                            val checklist = Checklist(
-                                light = selectedOptions.value["Scheinwerfer"],
-                                engine = selectedOptions.value["Motor"],
-                                bumper = selectedOptions.value["Stoßstange"],
-                                sensor = selectedOptions.value["Sensoren"],
-                                exterior = selectedOptions.value["Karosserie"],
-                                rims = selectedOptions.value["Felgen"],
-                                brakes = selectedOptions.value["Bremsen"],
-                                suspension = selectedOptions.value["Suspension"],
-                                wheel = selectedOptions.value["Radlauf"],
-                                sill = selectedOptions.value["Fensterbrett"],
-                                mirror = selectedOptions.value["Spiegel"],
-                                seat = selectedOptions.value["Sitze"],
-                                infotainment = selectedOptions.value["Infotainment"],
-                                interior = selectedOptions.value["Innenraum"],
-                                exhaust = selectedOptions.value["Auspuff"],
-                            )
-                            checklistViewModel.saveChecklist(checklist)
+                            Log.d("MyScreen", "Selected options updated: ${selectedOptions.value}")
+
                         }
                     )
                 }
