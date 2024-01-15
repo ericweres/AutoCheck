@@ -1,6 +1,9 @@
 package com.autocheck.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.autocheck.data.Checklist
@@ -27,6 +30,19 @@ class GarageViewModel @Inject constructor(
     private val _vehicles = MutableStateFlow<List<VehicleWithChecklist>>(emptyList())
     val vehicles: StateFlow<List<VehicleWithChecklist>> = _vehicles.asStateFlow()
 
+
+    enum class SortType {
+        NAME, TYPE
+    }
+
+    var sortType by mutableStateOf(SortType.NAME)
+
+    fun sortVehicles() {
+        _vehicles.value = when (sortType) {
+            SortType.NAME -> vehicles.value.sortedBy { it.vehicle.name }
+            SortType.TYPE -> vehicles.value.sortedBy { it.vehicle.type }
+        }
+    }
     fun loadVehicles(userId: Int) {
         viewModelScope.launch {
             val listOfGarage = garageRepository.getGarageByUserId(userId)
@@ -62,21 +78,21 @@ class GarageViewModel @Inject constructor(
     fun addSampleVehicles() {
         viewModelScope.launch {
             val vehicles = listOf(
-                Vehicle(name = "Mercedes E-Klasse T Modell", type = "car"),
-                Vehicle(name = "Audi A4 Avant", type = "bike"),
-                Vehicle(name = "Opel Insignia Sports Tourer", type = "car"),
-                Vehicle(name = "Mercedes CLS Shooting Brake", type = "bike"),
+                Vehicle(name = "Mercedes E-Klasse T", type = "car"),
+                Vehicle(name = "Kawasaki Ninja H2R", type = "bike"),
+                Vehicle(name = "Opel Insignia ST", type = "car"),
+                Vehicle(name = "Yamaha R1", type = "bike"),
                 Vehicle(name = "BMW 520d Touring", type = "car"),
-                Vehicle(name = "Audi A6 Avant", type = "bike"),
-                Vehicle(name = "Porsche Taycan Sports Tourismo", type = "car"),
+                Vehicle(name = "BMW S1000RR", type = "bike"),
+                Vehicle(name = "Porsche Taycan ST", type = "car"),
                 Vehicle(name = "BMW 318d Touring", type = "car"),
                 Vehicle(name = "Honda Accord", type = "car"),
                 Vehicle(name = "Mitsubishi Lancer", type = "car"),
                 Vehicle(name = "Jaguar XF ST", type = "car"),
                 Vehicle(name = "Audi RS6 Avant", type = "car"),
-                Vehicle(name = "Volkswagen Golf Variant", type = "car"),
-                Vehicle(name = "Skoda Octavia Kombi", type = "car"),
-                Vehicle(name = "Renault Talisman Tourer", type = "car"),
+                Vehicle(name = "Volkswagen Golf", type = "car"),
+                Vehicle(name = "Skoda Octavia", type = "car"),
+                Vehicle(name = "Renault Talisman", type = "car"),
                 Vehicle(name = "Kia Optima ST", type = "car"),
                 Vehicle(name = "Hyundai I50 ST", type = "car"),
                 Vehicle(name = "Mazda 6", type = "car"),

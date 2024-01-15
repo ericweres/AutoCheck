@@ -76,14 +76,16 @@ fun SearchScreen(
                 label = "Bike",
                 itemToAddOrRemove = "bike",
                 selectedItems = selectedItems,
-                viewModel = searchViewModel
+                viewModel = searchViewModel,
+                modifier = Modifier.weight(1f).padding(8.dp)
             )
             TogglingButton(
                 icon = Icons.Default.DirectionsCar,
                 label = "Auto",
                 itemToAddOrRemove = "car",
                 selectedItems = selectedItems,
-                viewModel = searchViewModel
+                viewModel = searchViewModel,
+                modifier = Modifier.weight(1f).padding(8.dp)
             )
         }
         SearchBar(
@@ -122,11 +124,12 @@ fun TogglingButton(
     label: String,
     itemToAddOrRemove: String,
     selectedItems: MutableList<String>,
-    viewModel: SearchViewModel
+    viewModel: SearchViewModel,
+    modifier: Modifier
 ) {
     val isSelected = itemToAddOrRemove in selectedItems
 
-    Button(
+    Button(modifier = modifier,
         onClick = {
 
             if (isSelected) {
@@ -136,8 +139,6 @@ fun TogglingButton(
             }
             viewModel.updateSearchQuery(viewModel.searchQuery.value, selectedItems)
         },
-        modifier = Modifier
-            .padding(8.dp)
     ) {
         Icon(
             imageVector = icon,
