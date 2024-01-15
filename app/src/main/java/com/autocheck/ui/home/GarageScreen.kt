@@ -59,8 +59,8 @@ fun GarageScreen(modifier: Modifier, userViewModel: UserViewModel
     Column (modifier = modifier.fillMaxWidth()) {
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
-            Button(modifier = Modifier.weight(1f),
+            , horizontalArrangement = Arrangement.SpaceEvenly) {
+            Button(modifier = Modifier.weight(1f).padding(8.dp),
                 onClick = {
                 garageViewModel.sortType = GarageViewModel.SortType.NAME
                 garageViewModel.sortVehicles()
@@ -75,7 +75,7 @@ fun GarageScreen(modifier: Modifier, userViewModel: UserViewModel
                 Text("Sort by Type")
             }
         }
-        Garage(vehicles, modifier = Modifier)
+        Garage(vehicles, modifier = Modifier,garageViewModel)
     }
     LaunchedEffect(userId) {
         garageViewModel.loadVehicles(userId)
@@ -101,20 +101,20 @@ fun calculateNormalizedAverage(checklist: Checklist): Float {
 
 @Composable
 
-fun Garage(vehicles: List<VehicleWithChecklist>, modifier: Modifier) {
+fun Garage(vehicles: List<VehicleWithChecklist>, modifier: Modifier,garageViewModel: GarageViewModel) {
 
 
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
     ) {
             items(vehicles) { vehicle ->
-                GarageItem(vehicle)
+                GarageItem(vehicle, garageViewModel)
             }
         }
     }
 
     @Composable
-    fun GarageItem(vehicle: VehicleWithChecklist) {
+    fun GarageItem(vehicle: VehicleWithChecklist,garageViewModel: GarageViewModel) {
         Log.d("GarageScreen", "Displaying vehicle: ${vehicle.vehicle.name}")
         Card(
             modifier = Modifier
@@ -152,7 +152,6 @@ fun Garage(vehicles: List<VehicleWithChecklist>, modifier: Modifier) {
                     )
 
                 }
-
             }
         }
 
