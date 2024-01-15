@@ -132,11 +132,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
                                 //Außenspiegel Button
                                 IconButton(
                                     onClick = {
-                                        showDialog = true;
-                                        if (isIconChanged) {
-                                            isIconChanged = !isIconChanged
-                                        }
-                                    },
+                                        showDialog = true },
 
                                     )
                                 {
@@ -175,9 +171,7 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
                                 IconButton(
                                     onClick = {
                                         showDialog2 = true
-                                        if (isIconChanged2) {
-                                            isIconChanged2 = !isIconChanged2
-                                        }
+
                                     },
 
                                     )
@@ -417,7 +411,11 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog = false }
+                    onClick = { showDialog = false
+                        if (isIconChanged) {
+                            isIconChanged = !isIconChanged
+                        }
+                    }
 
                 ) {
                     Text(text = "Zurück")
@@ -455,7 +453,11 @@ fun IllustBike(modifier: Modifier, navController: NavHostController, vehicleId: 
             // Bestätigungsbutton im Popup
             confirmButton = {
                 Button(
-                    onClick = { showDialog2 = false }
+                    onClick = { showDialog2 = false
+                        if (isIconChanged2) {
+                            isIconChanged2 = !isIconChanged2
+                        }
+                    }
 
                 ) {
                     Text(text = "Zurück")
