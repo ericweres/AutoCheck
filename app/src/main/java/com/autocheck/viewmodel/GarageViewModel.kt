@@ -46,22 +46,20 @@ class GarageViewModel @Inject constructor(
     fun loadVehicles(userId: Int) {
         viewModelScope.launch {
             val listOfGarage = garageRepository.getGarageByUserId(userId)
-            val carIds = listOfGarage.map { it.carId }
-            val checklistIds = listOfGarage.map { it.checklistId }
+            val carIds = listOfGarage.map { it.carId }.distinct()
+            val checklistIds = listOfGarage.map { it.checklistId }.distinct()
 
-            val allVehicles = vehicleRepository.getVehiclesByIds(carIds.distinct())
-            val allChecklists = checklistRepository.getChecklistByIds(checklistIds.distinct())
+            val allVehicles = vehicleRepository.getVehiclesByIds(carIds)
+            val allChecklists = checklistRepository.getChecklistByIds(checklistIds)
 
-
-            val duplicatedVehicles = carIds.mapNotNull { id ->
-                allVehicles.find { vehicle -> vehicle.id == id }
-            }
-            val carIdToChecklistIdMap = listOfGarage.associate { it.carId to it.checklistId }
-
-            val vehiclesWithChecklists = duplicatedVehicles.map { vehicle ->
-                val checklistId = carIdToChecklistIdMap[vehicle.id]
-                val checklist = allChecklists.find { it.id == checklistId }
-                VehicleWithChecklist(vehicle, checklist)
+            val vehiclesWithChecklists = listOfGarage.mapNotNull { garage ->
+                val vehicle = allVehicles.find { it.id == garage.carId }
+                val checklist = allChecklists.find { it.id == garage.checklistId }
+                if (vehicle != null && checklist != null) {
+                    VehicleWithChecklist(vehicle, checklist)
+                } else {
+                    null
+                }
             }
 
             _vehicles.value = vehiclesWithChecklists
