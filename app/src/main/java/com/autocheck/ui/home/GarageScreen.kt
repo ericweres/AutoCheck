@@ -1,6 +1,7 @@
 package com.autocheck.ui.home
 
 import android.util.Log
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,7 +48,6 @@ fun GarageScreen(modifier: Modifier, userViewModel: UserViewModel
     val garageViewModel: GarageViewModel = hiltViewModel()
     val vehicles by garageViewModel.vehicles.collectAsState()
     val userId by userViewModel.userId.collectAsState()
-    garageViewModel.loadVehicles(userId)
     if (vehicles.isEmpty()) {
         Button(
             modifier = modifier.fillMaxWidth(),
@@ -55,8 +56,31 @@ fun GarageScreen(modifier: Modifier, userViewModel: UserViewModel
             Text(text = "DEBUG: Füge Fahrzeuge ein")
         }
     }
+    Column (modifier = modifier.fillMaxWidth()) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
+            Button(modifier = Modifier.weight(1f),
+                onClick = {
+                garageViewModel.sortType = GarageViewModel.SortType.NAME
+                garageViewModel.sortVehicles()
+            }) {
+                Text("Sort by Name")
+            }
+            Button(modifier = Modifier.weight(1f).padding(8.dp),
+                onClick = {
+                garageViewModel.sortType = GarageViewModel.SortType.TYPE
+                garageViewModel.sortVehicles()
+            }) {
+                Text("Sort by Type")
+            }
+        }
+        Garage(vehicles, modifier = Modifier)
+    }
+    LaunchedEffect(userId) {
+        garageViewModel.loadVehicles(userId)
+    }
 
-    Garage(vehicles, modifier = modifier)
 }
 
 fun calculateNormalizedAverage(checklist: Checklist): Float {
@@ -131,7 +155,7 @@ fun Garage(vehicles: List<VehicleWithChecklist>, modifier: Modifier) {
 
             }
         }
-        
+
     }
     fun getConditionColor(condition: Float): Color {
         return when {
