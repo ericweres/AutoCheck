@@ -1,7 +1,6 @@
 package com.autocheck.ui
 
-import HomeScreen
-import androidx.compose.foundation.layout.fillMaxWidth
+import com.autocheck.ui.home.HomeScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -23,45 +22,64 @@ import com.autocheck.ui.illustrations.IllustBike
 import com.autocheck.ui.illustrations.IllustKombi
 import com.autocheck.viewmodel.UserViewModel
 
+/**
+ * Composable-Funktion für den Navigationsgraphen der AutoCheck-App.
+ *
+ * Diese Funktion definiert den Navigationsgraphen der App, der verschiedene Bildschirme
+ * mit ihren entsprechenden Composables verbindet. Jeder Bildschirm ist in einem [Scaffold]
+ * mit Top- und Bottom-Navigation eingebettet.
+ *
+ * @param navController [NavHostController] für die Navigation zwischen den Bildschirmen.
+ * @param modifier Ein optionaler Modifier zur Steuerung der Layout-Eigenschaften des Navigationsgraphen.
+ */
 @Composable
 fun AutoCheckNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    ) {
+) {
+    // HiltViewModel wird für die Abhängigkeitsinjektion verwendet, um den ViewModel zu erhalten
     val viewModel: UserViewModel = hiltViewModel()
+
+    // Navigations-Host, der die verschiedenen Composables für die App verbindet
     NavHost(
         navController = navController,
-        startDestination = "search",
+        startDestination = "search", // Standardstartziel der App
         modifier = modifier,
     ) {
-        composable( "login") {
-            LoginScreen(navController,viewModel)
+        // Composable für den Login-Bildschirm
+        composable("login") {
+            LoginScreen(navController, viewModel)
         }
-        composable( "getStarted") {
+
+        // Composable für den "Get Started"-Bildschirm
+        composable("getStarted") {
             GetStarted(navController)
         }
-        composable( "register") {
-            RegisterScreen(navController,viewModel)
+
+        // Composable für den Registrierungs-Bildschirm
+        composable("register") {
+            RegisterScreen(navController, viewModel)
         }
-       composable("home") {
-           Scaffold(
-               bottomBar = { BottomNavigationBar(modifier = Modifier,
-                   navController) },
-               topBar = { TopNavigationBar(modifier = Modifier,
-                   navController,"Startseite") },
-           ) { innerPadding ->
+
+        // Composable für den Hauptbildschirm ("home") mit Scaffold für Top- und Bottom-Navigation
+        composable("home") {
+            Scaffold(
+                bottomBar = { BottomNavigationBar(modifier = Modifier, navController) },
+                topBar = { TopNavigationBar(modifier = Modifier, navController, "Startseite") },
+            ) { innerPadding ->
                 HomeScreen(
-                   modifier = Modifier.padding(innerPadding),
+                    modifier = Modifier.padding(innerPadding),
                     viewModel
-               )
-           }
-       }
+                )
+            }
+        }
+
+        // Weitere Composables für Werkstätten, Kombi, Motorrad, Checkliste, Suche und Garage
+        // Jedes Composable ist in einem Scaffold mit Top- und Bottom-Navigation eingebettet
         composable("werkstaetten") {
             Scaffold(
-                bottomBar = { BottomNavigationBar(modifier = Modifier,
-                    navController) },
-                topBar = { TopNavigationBar(modifier = Modifier,
-                    navController,"Werkstätten") },
+                bottomBar = { BottomNavigationBar(modifier = Modifier, navController) },
+                topBar = { TopNavigationBar(modifier = Modifier, navController, "Werkstätten") },
             ) { innerPadding ->
                 Werkstaetten(
                     modifier = Modifier.padding(innerPadding)
@@ -69,14 +87,12 @@ fun AutoCheckNavHost(
             }
         }
 
-        composable( "kombi/{vehicleId}") {
-                backStackEntry ->
+        // Composable für "kombi/{vehicleId}" mit Übergabe der Fahrzeug-ID
+        composable("kombi/{vehicleId}") { backStackEntry ->
             val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toIntOrNull()
             Scaffold(
-                bottomBar = { BottomNavigationBar(modifier = Modifier,
-                    navController) },
-                topBar = { TopNavigationBar(modifier = Modifier,
-                    navController,"Kombi") },
+                bottomBar = { BottomNavigationBar(modifier = Modifier, navController) },
+                topBar = { TopNavigationBar(modifier = Modifier, navController, "Kombi") },
             ) { innerPadding ->
                 IllustKombi(
                     modifier = Modifier.padding(innerPadding),
@@ -86,14 +102,12 @@ fun AutoCheckNavHost(
             }
         }
 
-        composable("bike/{vehicleId}") {
-                backStackEntry ->
+        // Composable für "bike/{vehicleId}" mit Übergabe der Fahrzeug-ID
+        composable("bike/{vehicleId}") { backStackEntry ->
             val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toIntOrNull()
             Scaffold(
-                bottomBar = { BottomNavigationBar(modifier = Modifier,
-                    navController) },
-                topBar = { TopNavigationBar(modifier = Modifier,
-                    navController,"Motorrad") },
+                bottomBar = { BottomNavigationBar(modifier = Modifier, navController) },
+                topBar = { TopNavigationBar(modifier = Modifier, navController, "Motorrad") },
             ) { innerPadding ->
                 IllustBike(
                     modifier = Modifier.padding(innerPadding),
@@ -103,14 +117,12 @@ fun AutoCheckNavHost(
             }
         }
 
-        composable( route = "checkList/{vehicleId}") {
-                backStackEntry ->
+        // Composable für "checkList/{vehicleId}" mit Übergabe der Fahrzeug-ID
+        composable("checkList/{vehicleId}") { backStackEntry ->
             val vehicleId = backStackEntry.arguments?.getString("vehicleId")?.toIntOrNull()
             Scaffold(
-                bottomBar = { BottomNavigationBar(modifier = Modifier,
-                    navController) },
-                topBar = { TopNavigationBar(modifier = Modifier,
-                    navController,"Checkliste") },
+                bottomBar = { BottomNavigationBar(modifier = Modifier, navController) },
+                topBar = { TopNavigationBar(modifier = Modifier, navController, "Checkliste") },
             ) { innerPadding ->
                 CheckList(
                     modifier = Modifier.padding(innerPadding),
@@ -121,25 +133,21 @@ fun AutoCheckNavHost(
             }
         }
 
-
-        composable( route = "search") {
+        // Weitere Composables für "search" und "garage"
+        // Jedes Composable ist in einem Scaffold mit Top- und Bottom-Navigation eingebettet
+        composable("search") {
             Scaffold(
-                bottomBar = { BottomNavigationBar(modifier = Modifier,
-                    navController) },
-                topBar = { TopNavigationBar(modifier = Modifier,
-                    navController,"Suche") },
+                bottomBar = { BottomNavigationBar(modifier = Modifier, navController) },
+                topBar = { TopNavigationBar(modifier = Modifier, navController, "Suche") },
             ) { innerPadding ->
                 SearchScreen(modifier = Modifier.padding(innerPadding), navController)
             }
         }
 
-
-        composable( route = "garage") {
+        composable("garage") {
             Scaffold(
-                bottomBar = { BottomNavigationBar(modifier = Modifier,
-                    navController) },
-                topBar = { TopNavigationBar(modifier = Modifier,
-                    navController,"Meine Garage") },
+                bottomBar = { BottomNavigationBar(modifier = Modifier, navController) },
+                topBar = { TopNavigationBar(modifier = Modifier, navController, "Meine Garage") },
             ) { innerPadding ->
                 GarageScreen(
                     modifier = Modifier.padding(innerPadding),
@@ -147,6 +155,5 @@ fun AutoCheckNavHost(
                 )
             }
         }
-
     }
 }

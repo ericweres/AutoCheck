@@ -13,10 +13,20 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
+/**
+ * Das [DatabaseModule] Dagger Hilt (Dependency Injection (DI)-Framework für Android)
+ * Modul bietet Abhängigkeiten für die Datenbankzugriffskomponenten.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
+    /**
+     * Stellt eine Instanz der [AppDatabase] bereit.
+     *
+     * @param appContext Der Anwendungskontext.
+     * @return Die Datenbankinstanz.
+     */
     @Provides
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(
@@ -28,21 +38,45 @@ object DatabaseModule {
             .build()
     }
 
+    /**
+     * Stellt eine Instanz der [UserDao] bereit.
+     *
+     * @param appDatabase Die Datenbankinstanz.
+     * @return Die [UserDao] Instanz.
+     */
     @Provides
     fun provideUserDao(appDatabase: AppDatabase): UserDao {
         return appDatabase.userDao()
     }
 
+    /**
+     * Stellt eine Instanz der [ChecklistDao] bereit.
+     *
+     * @param appDatabase Die Datenbankinstanz.
+     * @return Die [ChecklistDao] Instanz.
+     */
     @Provides
     fun provideChecklistDao(appDatabase: AppDatabase): ChecklistDao {
         return appDatabase.checklistDao()
     }
 
+    /**
+     * Stellt eine Instanz der [GarageDao] bereit.
+     *
+     * @param appDatabase Die Datenbankinstanz.
+     * @return Die [GarageDao] Instanz.
+     */
     @Provides
     fun provideGarageDao(appDatabase: AppDatabase): GarageDao {
         return appDatabase.garageDao()
     }
 
+    /**
+     * Stellt eine Instanz der [VehicleDao] bereit.
+     *
+     * @param appDatabase Die Datenbankinstanz.
+     * @return Die [VehicleDao] Instanz.
+     */
     @Provides
     fun provideVehicleDao(appDatabase: AppDatabase): VehicleDao {
         return appDatabase.vehicleDao()

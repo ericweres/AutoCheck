@@ -21,8 +21,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.autocheck.R
-import com.autocheck.ui.theme.AutoCheckTheme
 
+/**
+ * Composable-Funktion für die untere Navigationsleiste.
+ *
+ * Diese Funktion erstellt eine benutzerdefinierte Navigationsleiste mit Icons und Labels für verschiedene
+ * Navigationsziele in der App.
+ *
+ * @param modifier Ein optionaler Modifier zur Steuerung der Layout-Eigenschaften der Navigationsleiste.
+ * @param navController [NavHostController] für die Navigation zwischen den Bildschirmen.
+ */
 @Composable
 fun BottomNavigationBar(modifier: Modifier = Modifier, navController: NavHostController) {
     // Get screen height
@@ -79,13 +87,13 @@ fun BottomNavigationBar(modifier: Modifier = Modifier, navController: NavHostCon
                 Icon(
                     painter = painterResource(id = R.drawable.ic_camera),
                     contentDescription = null,
-                    tint = if (false) Color.White else Color.Black
+                    tint = Color.Black
                 )
             },
             label = {
                 Text(
                     text = "Foto machen",
-                    color = if (false) Color.White else Color.Black
+                    color = Color.Black
                 )
             },
             selected = false,
@@ -114,8 +122,9 @@ fun BottomNavigationBar(modifier: Modifier = Modifier, navController: NavHostCon
 }
 
 
-
-
+/**
+ * Vorschau für die BottomNavigationBar-Funktion.
+ */
 @Preview
 @Composable
 fun BottomNavigationBarPreview() {

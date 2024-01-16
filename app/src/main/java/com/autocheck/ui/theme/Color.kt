@@ -2,6 +2,9 @@ package com.autocheck.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+/**
+ * Definition von benutzerdefinierten Farben für das AutoCheck-UI-Design.
+ */
 val Purple80 = Color(0xFF003C44)
 val PurpleGrey80 = Color(0xFF012724)
 val Pink80 = Color(0xFF078797)

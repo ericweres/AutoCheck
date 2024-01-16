@@ -4,6 +4,26 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Die [Checklist] Datenklasse repräsentiert die Entität "Checklist" in der SQLite-Datenbank.
+ *
+ * @property id Die eindeutige ID der Checkliste, automatisch generiert.
+ * @property light Der Zustand der Beleuchtung auf der Checkliste.
+ * @property engine Der Zustand des Motors auf der Checkliste.
+ * @property bumper Der Zustand des Stoßfängers auf der Checkliste.
+ * @property sensor Der Zustand des Sensors auf der Checkliste.
+ * @property exterior Der Zustand der äußeren Fahrzeugteile auf der Checkliste.
+ * @property rims Der Zustand der Felgen auf der Checkliste.
+ * @property brakes Der Zustand der Bremsen auf der Checkliste.
+ * @property suspension Der Zustand der Aufhängung auf der Checkliste.
+ * @property wheel Der Zustand des Rads auf der Checkliste.
+ * @property sill Der Zustand der Schwelle auf der Checkliste.
+ * @property mirror Der Zustand des Rückspiegels auf der Checkliste.
+ * @property seat Der Zustand des Sitzes auf der Checkliste.
+ * @property infotainment Der Zustand des Infotainmentsystems auf der Checkliste.
+ * @property interior Der Zustand des Fahrzeuginnenraums auf der Checkliste.
+ * @property exhaust Der Zustand des Auspuffs auf der Checkliste.
+ */
 @Entity
 data class Checklist(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,

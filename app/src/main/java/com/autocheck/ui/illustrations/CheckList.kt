@@ -33,11 +33,22 @@ import com.autocheck.viewmodel.GarageViewModel
 import com.autocheck.viewmodel.UserViewModel
 import com.autocheck.viewmodel.VehicleViewModel
 
-
+/**
+ * Composable-Funktion für die Anzeige der Checkliste.
+ *
+ * Diese Funktion erstellt die UI für die Checkliste eines Fahrzeugs.
+ *
+ * @param modifier Modifier zur Steuerung der Layout-Eigenschaften der UI-Elemente.
+ * @param navController [NavHostController] für die Navigation zwischen Bildschirmen.
+ * @param vehicleId Die ID des ausgewählten Fahrzeugs.
+ * @param userViewModel [UserViewModel] für die Benutzerinformationen.
+ */
 @Composable
 fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: Int?,userViewModel: UserViewModel
 ) {
+    // Liste von Optionen für den Radio-Button (Gut, Mittel, Schlecht)
     val radioOptions = listOf("Gut", "Mittel", "Schlecht")
+    // Liste von Fahrzeugteilen für die Checkliste
     val carParts = listOf(
         "Scheinwerfer",
         "Motor",
@@ -56,18 +67,24 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
         "Innenraum",
         "Auspuff"
     )
+
+    // ViewModels für die Geschäftslogik
     val garageViewModel: GarageViewModel = hiltViewModel()
     val checklistViewModel: ChecklistViewModel = hiltViewModel()
     val vehicleViewModel: VehicleViewModel = hiltViewModel()
+    // Benutzer-ID sammeln
     val userId by userViewModel.userId.collectAsState()
 
+    // Aktuell ausgewähltes Fahrzeug und gespeicherte Checklisten-ID sammeln
     val selectedVehicle by vehicleViewModel.selectedVehicle.collectAsState()
     val savedChecklistId by checklistViewModel.savedChecklistId.collectAsState()
 
+    // Zustand, um ausgewählte Optionen für jedes Fahrzeugteil zu speichern
     val selectedOptions = remember { mutableStateOf(mapOf<String, Int>()) }
 
-
+    // Wenn eine Fahrzeug-ID Not null ist
     if (vehicleId != null) {
+        // Fahrzeuginformationen vom ViewModel abrufen
         vehicleViewModel.fetchVehicleById(vehicleId)
 
 
@@ -85,6 +102,7 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
                 style = MaterialTheme.typography.headlineLarge
             )
             Button(onClick = {
+                // Erstellen einer Checkliste basierend auf ausgewählten Optionen
                 val checklist = Checklist(
                     light = selectedOptions.value["Scheinwerfer"],
                     engine = selectedOptions.value["Motor"],
@@ -103,23 +121,28 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
                     interior = selectedOptions.value["Innenraum"],
                     exhaust = selectedOptions.value["Auspuff"],
                 )
+                // Speichern der Checkliste und Weiterleitung zur Garage
                 checklistViewModel.saveChecklist(checklist)
                              },
+                // Button ist nur aktiviert, wenn alle Optionen ausgewählt sind
                 enabled = selectedOptions.value.size == carParts.size
             ) {
                 Text("Parken",color = MaterialTheme.colorScheme.onPrimary)
             }
         }
+            // Überwachen des Zustands der gespeicherten Checklisten-ID
             LaunchedEffect(savedChecklistId) {
+                // Wenn eine Checklisten-ID vorhanden ist, Fahrzeug zur Garage hinzufügen und zur Garage navigieren
                 if (savedChecklistId != -1) {
                     garageViewModel.addVehicleToGarage(userId, vehicleId, savedChecklistId)
                     navController.navigate("garage")
                 }
             }
-        LazyColumn() {
+            // Liste von Fahrzeugteilen in einer LazyColumn anzeigen
+        LazyColumn {
         items(carParts) { teil ->
-            val selectedOption = selectedOptions.value[teil] ?: 0
-            val backgroundColor = when (selectedOption) {
+            // Hintergrundfargrundfarbe basierend auf der ausgewählten Option
+            val backgroundColor = when (selectedOptions.value[teil] ?: 0) {
                 1 -> Color.Green.copy(alpha = 0.2f)
                 2 -> Color(0xFFFFA500).copy(alpha = 0.2f)
                 3 -> Color.Red.copy(alpha = 0.2f)
@@ -135,13 +158,15 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                radioOptions.forEachIndexed { index, zustand ->
+                radioOptions.forEachIndexed { index, _ ->
                     val isSelected = selectedOptions.value[teil] == index + 1
                     RadioButton(
                         selected = isSelected,
                         onClick = {
+                            // Ausgewählte Option für das Fahrzeugteil aktualisieren
                             selectedOptions.value += (teil to index + 1)
 
+                            // Log-Nachricht für die Aktualisierung der ausgewählten Optionen
                             Log.d("MyScreen", "Selected options updated: ${selectedOptions.value}")
 
                         }
@@ -157,14 +182,14 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
                         ) {
                             append("$teil: ")
                         }
-                        val selectedOption = selectedOptions.value[teil]
-                        val color = when (selectedOption) {
+                        val innerSelectedOption = selectedOptions.value[teil]
+                        val color = when (innerSelectedOption) {
                             1 -> Color.Green
                             2 -> Color(0xFFFFA500)
                             3 -> Color.Red
                             else -> Color.Gray
                         }
-                        val zustand = when (selectedOption) {
+                        val zustand = when (innerSelectedOption) {
                             1 -> "Gut"
                             2 -> "Mittel"
                             3 -> "Schlecht"
@@ -185,6 +210,7 @@ fun CheckList(modifier: Modifier, navController: NavHostController, vehicleId: I
         }
         }
     }} else {
+        // Fehlermeldung anzeigen, wenn keine Fahrzeug-ID vorhanden ist
         Text(text ="Ein Fehler ist aufgetreten")
     }
 }

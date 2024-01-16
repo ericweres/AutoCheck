@@ -15,44 +15,43 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+/**
+ * Definition des AutoCheck-Themas basierend auf dem Dunkel- oder Hell-Modus.
+ */
+
+// Dunkles Farbschema
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
+// Helles Farbschema
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
     tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    // Fügen Sie hier bei Bedarf weitere Standardfarben hinzu
 )
 
 @Composable
 fun AutoCheckTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
+    // Dynamische Farbe ist ab Android 12 verfügbar
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    // Bestimmen Sie das Farbschema basierend auf dem Dunkel- oder Hell-Modus und der Android-Version
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
+    // Aktualisieren Sie die StatusBar-Farbe und den StatusBar-Text basierend auf dem Farbschema
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
@@ -62,6 +61,7 @@ fun AutoCheckTheme(
         }
     }
 
+    // Wenden Sie das MaterialTheme unter Verwendung des ausgewählten Farbschemas und der standardmäßigen Schriftarten an
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
